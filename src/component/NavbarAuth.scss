@@ -1,0 +1,44 @@
+.navbar-main{
+
+ position: sticky;
+ top: 0;
+ z-index: 1000;
+ background-color: whitesmoke;
+        box-shadow: 0 8px 6px -10px black;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+    
+    .left-side {
+        font-size: 28px;
+        font-weight: 600;
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 20px;
+        text-decoration: none;
+        color: black;
+    }
+    
+    .right-side {
+        font-size: 16px;
+        flex: 1;
+        font-weight: 500;
+        // background-color: teal;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+    
+        .children{
+            text-decoration: none;
+            color: black;
+    
+        }
+    }
+
+    
+}

@@ -1,0 +1,107 @@
+.account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .title {
+        font-weight: 600;
+        font-size: 22px;
+    }
+
+    .account-detail-box {
+        // max-width: 700px;
+        min-width: 850px;
+        height: 350px;
+        margin-bottom: 60px;
+        display: flex;
+        border: 1px solid gray;
+        border-radius: 5px;
+
+    }
+
+    .left-side {
+        flex: .7;
+        border-right: 1px solid gray;
+    }
+
+    .right-side {
+        flex: 2;
+    }
+
+    .menu{
+        cursor: pointer;
+        // background-color: aquamarine;
+        display: flex;
+        height: 36px;
+        align-items: center;
+        // justify-content: space-evenly;
+        gap: 20px;
+        padding-left: 20px;
+        font-weight: 600;
+        font-size: 18px;
+        margin-bottom: 3px;
+        border-bottom: 1px solid gray;
+
+    }
+    .menu:hover{
+        background-color: aliceblue;
+        // transition: background-color 2s ease-in-out ;
+        transform: scale(1.01);
+    }
+
+
+
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+height: 30px;
+padding: 20px;
+margin-top: 0px;
+}
+button{
+    background-color: transparent;
+    border: 2px solid gray;
+    color: black;
+}
+
+.profile{
+    display: flex;
+    justify-content:center;
+    gap: 30px;
+}
+
+.img-container{
+    height: 150px;
+    width: 150px;
+    // background-color: teal;
+    border-radius: 50%;
+    // display: flex;
+    // justify-content:center;
+    // align-items: center;
+    background-size: cover;
+background-repeat: no-repeat;
+}
+
+.profile-info{
+}
+
+.profile-menu{
+    display: flex;
+    height: 35px;
+    align-items: center;
+    // justify-content: space-evenly;
+    gap: 20px;
+    padding-left: 20px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 3px;
+    border-bottom: 1px solid gray;
+}
+
+
+}
