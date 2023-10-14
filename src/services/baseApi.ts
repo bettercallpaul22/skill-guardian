@@ -17,8 +17,8 @@ development:process.env.REACT_APP_DEVELOPMENT_URL,
 console.log("current enviroment ",enviroment.development)
 const baseQuery = fetchBaseQuery({
     baseUrl:enviroment.production,
-    mode:"cors",
     credentials:"include",
+    mode:"cors",
     
     //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
