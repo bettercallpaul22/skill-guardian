@@ -14,9 +14,8 @@ production:process.env.REACT_APP_PRODUCTION_URL,
 development:process.env.REACT_APP_DEVELOPMENT_URL,
 }
 
-console.log("current enviroment ",enviroment.development)
 const baseQuery = fetchBaseQuery({
-    baseUrl:enviroment.production,
+    baseUrl:"https://skill-guardian-server.vercel.app",
     credentials:"include",
     mode:"cors",
     
