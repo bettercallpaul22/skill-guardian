@@ -2,20 +2,30 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredientials, logOut } from "./features/userSlice";
 import { AuthService } from "./authServices";
 
-const baseUrl = "https://skill-guardian-server-dg7p1zvzx-bettercallpaul22.vercel.app/"
-// const baseUrl = "http://localhost:5000/"
+
 const authService = new AuthService()
+interface Enviroment{
+    production:string | undefined;
+    development:string | undefined;
+}
+
+const enviroment:Enviroment = {
+production:process.env.REACT_APP_PRODUCTION_URL,
+development:process.env.REACT_APP_DEVELOPMENT_URL,
+}
+
+console.log(enviroment.development)
 const baseQuery = fetchBaseQuery({
-    baseUrl,
+    baseUrl:enviroment.production,
     credentials: "include",
-    mode:"cors",
+    // mode:"cors",
     //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
         let state:any = getState()
         const token = authService.getUserToken()
         if (token) {
             headers.set("authorization", `Bearer ${token}`)
-            headers.set("Access-Control-Allow-Origin","*")
+            // headers.set("Access-Control-Allow-Origin","*")
         }
         // if (state.auth.token) {
         //     headers.set("authorization", `Bearer ${state.auth.token}`)

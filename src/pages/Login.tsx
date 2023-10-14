@@ -53,7 +53,7 @@ const Login:React.FC = () => {
             authService.setUserDisplayName(response.user.firstName)
             authService.setUserToken(response.token)
             dispatch(setCredientials(response))
-            navigate("/")
+            // navigate("/")
           }
           console.log("response", response)
         } catch (error: any) {
