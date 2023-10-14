@@ -137,3 +137,23 @@
 
 
 }
+
+
+//from 600px and above
+@media (max-width: 675px) {
+    .banner-main-container {
+        // grid-template-columns: repeat(2, 1fr);
+        background-color: darkcyan;
+
+
+        .search-options{
+            display: none;
+        }
+
+        .title-mobile{
+            display: block;
+        }
+    }
+
+ 
+}

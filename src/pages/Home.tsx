@@ -8,9 +8,10 @@ import Project from './Project'
 import { useSelector } from 'react-redux'
 import { selectCurrentToken } from '../services/features/userSlice'
 import { NavLink, useNavigate } from 'react-router-dom'
-import NavbarAuth from '../component/NavbarAuth'
+import BannerMobile from '../component/BannerMobile'
+// import NavbarAuth from '../component/NavbarAuth'
 
-const Home:React.FC = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate()
   const authService = new AuthService()
   const token = useSelector(selectCurrentToken)
@@ -53,6 +54,7 @@ const Home:React.FC = () => {
         // </div>
       } */}
       <Banner />
+      <BannerMobile />
       <Project />
     </div>
   )

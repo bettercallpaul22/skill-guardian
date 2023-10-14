@@ -28,48 +28,53 @@ const Navbar = () => {
         >
             <AppShell.Header>
                 <Group h="100%" px="md">
-                    <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+                    {location.pathname === "/" && (<Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />)}
                     <Group justify="space-between" style={{ flex: 1 }}>
-                    <NavLink to="/" className="logo">
-                        <div className="logo">Skill-Guardians</div>
-                    </NavLink>
-                    {
-                      location.pathname === "/become-a-tasker" ? "" :
+                        <NavLink to="/" className="logo">
+                            <div className="logo">Skill-Guardians</div>
+                        </NavLink>
+                        {
+                            location.pathname === "/become-a-tasker" ? "" :
 
-                        <Group ml="xl" gap={20} visibleFrom="sm">
+                                <Group ml="xl" gap={20} visibleFrom="sm">
 
-                            <NavLink to="/login">
-                                <UnstyledButton className={location.pathname !== "/login" ? "menu" : "menu-current"}>Login</UnstyledButton>
-                            </NavLink>
-                            <NavLink to="/register">
-                                <UnstyledButton className={location.pathname !== "/register" ? "menu" : "menu-current"}>Register</UnstyledButton>
-                            </NavLink>
-                            <NavLink to="/become-a-tasker">
-                                <Button className="menu"
-                                style={{color:"white"}}
-                                >Become A Tasker</Button>
-                            </NavLink>
-                           
-                        </Group>
-                    }
+                                    <NavLink to="/login">
+                                        <UnstyledButton className={location.pathname !== "/login" ? "menu" : "menu-current"}>Login</UnstyledButton>
+                                    </NavLink>
+                                    <NavLink to="/register">
+                                        <UnstyledButton className={location.pathname !== "/register" ? "menu" : "menu-current"}>Register</UnstyledButton>
+                                    </NavLink>
+                                    <NavLink to="/become-a-tasker">
+                                        <Button className="menu"
+                                            style={{ color: "white" }}
+                                        >Become A Tasker</Button>
+                                    </NavLink>
+
+                                </Group>
+                        }
                     </Group>
                 </Group>
             </AppShell.Header>
 
-            <AppShell.Navbar  py="md" px={4}>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/my-task" ? "menu" : "menu-current"}>My Task</UnstyledButton>
+           {location.pathname === "/" && ( <AppShell.Navbar py="md" px={4} style={{
+                // width: 500,
+                display: "flex",
+                flexDirection: "column",
+                gap: 30
+            }}>
+
+                <NavLink to="/login" className="nav-side-menu" onClick={toggle} >
+                    <UnstyledButton className="nav-menu" >Login</UnstyledButton>
                 </NavLink>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/book-a-task" ? "menu" : "menu-current"}>Book a Task</UnstyledButton>
+                <NavLink to="/register" className="nav-side-menu" onClick={toggle}>
+                    <UnstyledButton className="nav-menu">Register</UnstyledButton>
                 </NavLink>
-                <NavLink to={`/account/${authService.getUserId()}`}>
-                    <UnstyledButton className={location.pathname !== `/account/${authService.getUserId()}` ? "menu" : "menu-current"}>Account</UnstyledButton>
+                <NavLink to="/become-a-tasker" style={{ paddingBottom: 10, paddingLeft: 20 }} className="nav-side-menu" onClick={toggle}>
+                    <Button className="nnav-menu"
+                        style={{ color: "white" }}
+                    >Become A Tasker</Button>
                 </NavLink>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/support" ? "menu" : "menu-current"}>Support</UnstyledButton>
-                </NavLink>
-            </AppShell.Navbar>
+            </AppShell.Navbar>)}
 
             {/* <AppShell.Main>
           Navbar is only visible on mobile, links that are rendered in the header on desktop are

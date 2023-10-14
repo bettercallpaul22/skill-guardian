@@ -1,17 +1,42 @@
-.project-main-container{
-    background-color: rgb(253, 244, 232);
-}
-.header{
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: 700;
-}
+.project-main-container {
+    // background-color: darkolivegreen;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
 
-.project-data{
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+
+
 
 }
+
+//from 600px and above
+@media (min-width: 600px) {
+    .project-main-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card{
+        max-width: 300px;
+    }
+}
+
+
+
+//from 900px and above
+@media (min-width: 768px) {
+    .project-main-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+//from 1020px and above
+@media (min-width: 1020px) {
+    .project-main-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+

@@ -52,18 +52,25 @@ const AuthNavbar = () => {
                 </Group>
             </AppShell.Header>
 
-            <AppShell.Navbar  py="md" px={4}>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/my-task" ? "menu" : "menu-current"}>My Task</UnstyledButton>
+            <AppShell.Navbar  py="md" px={4}
+            style={{
+                // width: 500,
+                display: "flex",
+                flexDirection: "column",
+                gap: 30
+            }}
+            >
+                <NavLink to="/" className="nav-side-menu">
+                    <UnstyledButton className="nav-menu">My Task</UnstyledButton>
                 </NavLink>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/book-a-task" ? "menu" : "menu-current"}>Book a Task</UnstyledButton>
+                <NavLink to="/" className="nav-side-menu">
+                    <UnstyledButton className="nav-menu">Book a Task</UnstyledButton>
+                </NavLink >
+                <NavLink className="nav-side-menu" to={`/account/${authService.getUserId()}`}>
+                    <UnstyledButton className="nav-menu">Account</UnstyledButton>
                 </NavLink>
-                <NavLink to={`/account/${authService.getUserId()}`}>
-                    <UnstyledButton className={location.pathname !== `/account/${authService.getUserId()}` ? "menu" : "menu-current"}>Account</UnstyledButton>
-                </NavLink>
-                <NavLink to="/">
-                    <UnstyledButton className={location.pathname !== "/support" ? "menu" : "menu-current"}>Support</UnstyledButton>
+                <NavLink to="/" className="nav-side-menu">
+                    <UnstyledButton className="nav-menu">Support</UnstyledButton>
                 </NavLink>
             </AppShell.Navbar>
 

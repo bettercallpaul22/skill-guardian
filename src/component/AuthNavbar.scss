@@ -26,4 +26,18 @@
       text-decoration: underline;
     }
 
+    .nav-side-menu{
+      border-bottom: 1px solid gray;
+      // display: flex;
+      // align-items: center;
+      // padding-left: 20px;
+      // padding-bottom: 20px;
+      .nav-menu{
+        color:black;
+        text-decoration: none;
+        padding-left: 20px;
+        padding-bottom: 10px;
+      }
+    }
+
 }

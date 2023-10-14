@@ -109,7 +109,7 @@ const Register:React.FC = () => {
             placeholder="Last Name"
             {...form.getInputProps('lastName')}
           />
-          <PhoneInput
+          {/* <PhoneInput
             country={'ng'}
             // containerClass='g-input-2'
             containerStyle={{ marginTop: 15 }}
@@ -123,7 +123,7 @@ const Register:React.FC = () => {
               required: true,
               autoFocus: true
             }}
-          />
+          /> */}
           <TextInput
             withAsterisk
             label="Email"

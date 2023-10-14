@@ -1,11 +1,9 @@
 
 import { useEffect, useState } from 'react';
 import './App.css';
-import Hamburger from 'hamburger-react';
 import Register from './pages/Register';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from './pages/Login';
-// import NavBar from './component/Navbar';
 import Home from './pages/Home';
 import { AuthService } from './services/authServices';
 import { useGetUserQuery } from './services/api/userApiSlice';
@@ -16,7 +14,6 @@ import { selectCurrentToken, setCredientials } from './services/features/userSli
 import TaskForm from './pages/TaskForm';
 import Account from './pages/Account';
 import BecomeTasker from './pages/BecomeTasker';
-import NavbarAuth from './component/NavbarAuth';
 import Navbar from './component/Navbar';
 import AuthNavbar from './component/AuthNavbar';
 import SkillProfile from './pages/SkillProfile';
@@ -24,7 +21,6 @@ import SkillProfile from './pages/SkillProfile';
 function App() {
   const token = useSelector(selectCurrentToken)
 
-  const [isOpen, setisOpen] = useState(false)
   const dispatch = useDispatch()
   const authService = new AuthService()
 
@@ -42,7 +38,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      
+      {/* <AuthNavbar/> */}
       {token? <AuthNavbar/> :  <Navbar/>}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -54,7 +50,6 @@ function App() {
           <Route path="/skill-profile" element={<SkillProfile />} /> 
         </Routes>
       </BrowserRouter>
-      {/* <Hamburger toggled={isOpen} toggle={setisOpen} /> */}
 
     </>
   );
