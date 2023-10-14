@@ -14,11 +14,11 @@ production:process.env.REACT_APP_PRODUCTION_URL,
 development:process.env.REACT_APP_DEVELOPMENT_URL,
 }
 
-console.log(enviroment.development)
+console.log("current enviroment ",enviroment.development)
 const baseQuery = fetchBaseQuery({
     baseUrl:enviroment.production,
-    credentials: "include",
-    // mode:"cors",
+    credentials: "same-origin",
+    mode:"cors",
     //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
         let state:any = getState()
