@@ -17,7 +17,7 @@ development:process.env.REACT_APP_DEVELOPMENT_URL,
 console.log("current enviroment ",enviroment.development)
 const baseQuery = fetchBaseQuery({
     baseUrl:"https://skill-guardian-server-dg7p1zvzx-bettercallpaul22.vercel.app",
-    
+    credentials:"include,
     mode:"no-cors",
     
     //prepared headers function recieve the headers and destructure getsate from it
