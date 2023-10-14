@@ -18,8 +18,8 @@ console.log("current enviroment ",enviroment.development)
 const baseQuery = fetchBaseQuery({
     baseUrl:"https://skill-guardian-server-7bnyt6yzj-bettercallpaul22.vercel.app/",
     // baseUrl:"https://skill-guardian-server-dg7p1zvzx-bettercallpaul22.vercel.app",
-    credentials:"include,
-    mode:"no-cors",
+    credentials:"include",
+    mode:"cors",
     
     //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
