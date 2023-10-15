@@ -38,8 +38,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <AuthNavbar/>
-      {/* {token? <AuthNavbar/> :  <Navbar/>} */}
+      {/* <AuthNavbar/> */}
+      {token? <AuthNavbar/> :  <Navbar/>}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/task-form" element={<TaskForm />} />
