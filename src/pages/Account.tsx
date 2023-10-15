@@ -10,7 +10,7 @@ import { FaPhoneAlt } from "react-icons/fa"
 import { GrTransaction } from "react-icons/gr"
 import { HiMail } from "react-icons/hi"
 import { RiLockPasswordFill, RiDeleteBin5Fill } from "react-icons/ri"
-import { Button, Group, Avatar, NativeSelect } from '@mantine/core'
+import { Button, Group, Avatar, NativeSelect, Text } from '@mantine/core'
 import bg from "../assets/pexels-photo-220453.webp"
 import { useDispatch, useSelector } from 'react-redux'
 import { User } from '../model'
@@ -35,12 +35,37 @@ const Account: React.FC = () => {
         <div className="title">Account</div>
 
         <div className="mobile-account">
-        <NativeSelect
-        className='native-select'
-          data={['Profile', 'Notification', 'Billing Info', 'Cancel a Task', 'Account Balance', 'Password', 'Delete Account']}
-        
-        />
-      </div>
+        <div className="mobile-account-sub">
+          <NativeSelect
+            className='native-select'
+            data={['Profile', 'Notification', 'Billing Info', 'Cancel a Task', 'Account Balance', 'Password', 'Delete Account']}
+
+          />
+          <div className="acc-edit">
+            <Text>Account</Text>
+            <Button>EDIT</Button>
+          </div>
+
+          <div className="acc-info">
+            <Avatar size={100} src={user?.avatar === "" ? null : user?.avatar} alt="no image here" color="indigo" />
+            <div className="acc-name-container">
+              <CgProfile size={25} />
+              <p className="acc-name">obaro paul</p>
+            </div>
+            <p className='mobile-num'>+2348890238989</p>
+            <Group justify="center" mt="md">
+              <Button
+                onClick={() => {
+                  dispatch(logOut())
+                  navigate("/")
+                }}
+              >
+                LOGOUT
+              </Button>
+            </Group>
+          </div>
+          </div>
+        </div>
 
 
         <div className="account-detail-box">

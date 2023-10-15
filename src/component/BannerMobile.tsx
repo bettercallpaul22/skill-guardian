@@ -25,6 +25,7 @@ const navigate = useNavigate()
             />
             <Button className='btn'
               onClick={() => {
+                if(!selectedSkill) return
                 navigate("/task-form", { state: selectedSkill })
 
             }}
