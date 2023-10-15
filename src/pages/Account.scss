@@ -30,7 +30,7 @@
         flex: 2;
     }
 
-    .menu{
+    .menu {
         cursor: pointer;
         // background-color: aquamarine;
         display: flex;
@@ -45,7 +45,8 @@
         border-bottom: 1px solid gray;
 
     }
-    .menu:hover{
+
+    .menu:hover {
         background-color: aliceblue;
         // transition: background-color 2s ease-in-out ;
         transform: scale(1.01);
@@ -54,109 +55,124 @@
 
 
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid gray;
-height: 30px;
-padding: 20px;
-margin-top: 0px;
-}
-button{
-    background-color: transparent;
-    border: 2px solid gray;
-    color: black;
-}
-
-.profile{
-    display: flex;
-    justify-content:center;
-    gap: 30px;
-}
-
-.img-container{
-    height: 150px;
-    width: 150px;
-    // background-color: teal;
-    border-radius: 50%;
-    // display: flex;
-    // justify-content:center;
-    // align-items: center;
-    background-size: cover;
-background-repeat: no-repeat;
-}
-
-.profile-info{
-}
-
-.profile-menu{
-    display: flex;
-    height: 35px;
-    align-items: center;
-    // justify-content: space-evenly;
-    gap: 20px;
-    padding-left: 20px;
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 3px;
-    border-bottom: 1px solid gray;
-}
-
-
-}
-
-
-
-@media (max-width: 1024px){
- .account-container{
-    background-color: rgb(140, 187, 234);
-
-
-    .account-detail-box {
-        // max-width: 700px;
-        min-width: 650px;
-        height: 350px;
-        margin-bottom: 60px;
+    .header {
         display: flex;
-        border: 1px solid gray;
-        border-radius: 5px;
-
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid gray;
+        height: 30px;
+        padding: 20px;
+        margin-top: 0px;
     }
-    
 
+    button {
+        background-color: transparent;
+        border: 2px solid gray;
+        color: black;
+    }
 
-    .menu{
-        cursor: pointer;
-        // background-color: aquamarine;
+    .profile {
         display: flex;
-        height: 32px;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .img-container {
+        height: 150px;
+        width: 150px;
+        // background-color: teal;
+        border-radius: 50%;
+        // display: flex;
+        // justify-content:center;
+        // align-items: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .profile-info {}
+
+    .profile-menu {
+        display: flex;
+        height: 35px;
         align-items: center;
         // justify-content: space-evenly;
         gap: 20px;
         padding-left: 20px;
         font-weight: 600;
-        font-size: 12px;
+        font-size: 18px;
         margin-bottom: 3px;
         border-bottom: 1px solid gray;
-
     }
 
 
+}
 
 
 
- }
+@media (max-width: 1024px) {
+    .account-container {
+        background-color: rgb(140, 187, 234);
+
+
+        .account-detail-box {
+            // max-width: 700px;
+            min-width: 650px;
+            height: 350px;
+            margin-bottom: 60px;
+            display: flex;
+            border: 1px solid gray;
+            border-radius: 5px;
+
+        }
+
+
+
+        .menu {
+            cursor: pointer;
+            // background-color: aquamarine;
+            display: flex;
+            height: 32px;
+            align-items: center;
+            // justify-content: space-evenly;
+            gap: 20px;
+            padding-left: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 3px;
+            border-bottom: 1px solid gray;
+
+        }
+
+
+
+
+
+    }
+
+    .mobile-account {
+        display: none;
+    }
 
 }
 
 
-@media (max-width: 768px){
-    .account-container{
-background-color: plum;
-.account-detail-box{
-display: none;
-}
+@media (max-width: 768px) {
+    .account-container {
+
+        .account-detail-box {
+            display: none;
+        }
+
+        .mobile-account {
+            display: block;
+            background-color: aquamarine;
+        }
+        .native-select{
+            width: 100%;
+        }
+    
+
+       
     }
 
 }

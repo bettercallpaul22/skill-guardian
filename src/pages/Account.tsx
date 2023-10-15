@@ -10,7 +10,7 @@ import { FaPhoneAlt } from "react-icons/fa"
 import { GrTransaction } from "react-icons/gr"
 import { HiMail } from "react-icons/hi"
 import { RiLockPasswordFill, RiDeleteBin5Fill } from "react-icons/ri"
-import { Button, Group, Avatar } from '@mantine/core'
+import { Button, Group, Avatar, NativeSelect } from '@mantine/core'
 import bg from "../assets/pexels-photo-220453.webp"
 import { useDispatch, useSelector } from 'react-redux'
 import { User } from '../model'
@@ -33,6 +33,16 @@ const Account: React.FC = () => {
       {/* <NavBar /> */}
       <div className='account-container'>
         <div className="title">Account</div>
+
+        <div className="mobile-account">
+        <NativeSelect
+        className='native-select'
+          data={['Profile', 'Notification', 'Billing Info', 'Cancel a Task', 'Account Balance', 'Password', 'Delete Account']}
+        
+        />
+      </div>
+
+
         <div className="account-detail-box">
           <div className="left-side">
 
@@ -85,8 +95,8 @@ const Account: React.FC = () => {
             </div>
 
             <div className="profile">
-              
-            <Avatar size={100} src={user?.avatar === "" ? null : user?.avatar} alt="no image here" color="indigo" />
+
+              <Avatar size={100} src={user?.avatar === "" ? null : user?.avatar} alt="no image here" color="indigo" />
 
               <div className="profile-info">
                 <div className="profile-menu">
@@ -104,12 +114,12 @@ const Account: React.FC = () => {
                 </div>
                 <Group justify="center" mt="md">
                   <Button
-                  onClick={()=>{
-                    dispatch(logOut())
-                    navigate("/")
-                  }}
+                    onClick={() => {
+                      dispatch(logOut())
+                      navigate("/")
+                    }}
                   >
-                  LOGOUT
+                    LOGOUT
                   </Button>
                 </Group>
               </div>
@@ -119,6 +129,10 @@ const Account: React.FC = () => {
           </div>
         </div>
       </div>
+
+
+
+
     </div>
   )
 }
