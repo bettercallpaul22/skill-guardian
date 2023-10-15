@@ -48,6 +48,10 @@
         background-size: cover;
     }
 
+    .image{
+        max-width: 700px;
+    }
+
     .right-side {
         flex: .8;
         padding: 20px;
@@ -164,6 +168,58 @@
 }
 .button{
     width: 100%;
+}
+
+}
+
+
+
+
+@media (max-width:768px) {
+.main-become-tasker{
+    // background-color: yellow;
+
+
+
+ .body-section {
+    display: flex;
+    height: 550px;
+    flex-direction: column;
+}
+
+
+}
+
+
+
+
+}
+
+@media (min-width:768px) {
+.main-become-tasker{
+    // background-color: rgb(106, 148, 240);
+
+.image{
+    max-width: 400px;
+}
+
+
+
+}
+
+}
+
+
+@media (min-width:1280px) {
+.main-become-tasker{
+    // background-color: pink;
+
+.image{
+    max-width: 700px;
+}
+
+
+
 }
 
 }

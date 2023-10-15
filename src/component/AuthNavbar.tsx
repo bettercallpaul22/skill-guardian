@@ -60,16 +60,16 @@ const AuthNavbar = () => {
                 gap: 30
             }}
             >
-                <NavLink to="/" className="nav-side-menu">
+                <NavLink to="/" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">My Task</UnstyledButton>
                 </NavLink>
-                <NavLink to="/" className="nav-side-menu">
+                <NavLink to="/" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">Book a Task</UnstyledButton>
                 </NavLink >
-                <NavLink className="nav-side-menu" to={`/account/${authService.getUserId()}`}>
+                <NavLink className="nav-side-menu" to={`/account/${authService.getUserId()}`} onClick={toggle}>
                     <UnstyledButton className="nav-menu">Account</UnstyledButton>
                 </NavLink>
-                <NavLink to="/" className="nav-side-menu">
+                <NavLink to="/" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">Support</UnstyledButton>
                 </NavLink>
             </AppShell.Navbar>

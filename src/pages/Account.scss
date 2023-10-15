@@ -105,3 +105,58 @@ background-repeat: no-repeat;
 
 
 }
+
+
+
+@media (max-width: 1024px){
+ .account-container{
+    background-color: rgb(140, 187, 234);
+
+
+    .account-detail-box {
+        // max-width: 700px;
+        min-width: 650px;
+        height: 350px;
+        margin-bottom: 60px;
+        display: flex;
+        border: 1px solid gray;
+        border-radius: 5px;
+
+    }
+    
+
+
+    .menu{
+        cursor: pointer;
+        // background-color: aquamarine;
+        display: flex;
+        height: 32px;
+        align-items: center;
+        // justify-content: space-evenly;
+        gap: 20px;
+        padding-left: 20px;
+        font-weight: 600;
+        font-size: 12px;
+        margin-bottom: 3px;
+        border-bottom: 1px solid gray;
+
+    }
+
+
+
+
+
+ }
+
+}
+
+
+@media (max-width: 768px){
+    .account-container{
+background-color: plum;
+.account-detail-box{
+display: none;
+}
+    }
+
+}

@@ -41,20 +41,21 @@ const BecomeTasker = () => {
         <div> </div>
       </div> */}
       <div className="body">
-        <div className="body-section">
+        <div className="body-section" >
           {/* <div className="left-side" style={{ backgroundImage: `url(${bg})`, }}></div> */}
 
           <BackgroundImage
-            src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=720&q=80"
+            src="https://www.taskrabbit.com/v3/assets/_/_/_/src/becomeATaskerNew/images/hero_landing-fdeb7ef8f1a4361ec76f75d007d79546.jpg"
             radius="sm"
-            style={{ maxWidth: 700 }}
+            // style={{ maxWidth: 700 }}
+            className='image'
           >
-            <Center p="md" >
+            {/* <Center p="md" >
               <Text c="white">
                 BackgroundImage component can be used to add any content on image. It is useful for hero
                 headers and other similar sections
               </Text>
-            </Center>
+            </Center> */}
           </BackgroundImage>
 
           <div className="right-side">
