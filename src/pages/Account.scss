@@ -107,7 +107,11 @@
 
 }
 
-
+@media (min-width: 1024px) {
+    .mobile-account {
+        display: none;
+    }
+}
 
 @media (max-width: 1024px) {
     .account-container {
