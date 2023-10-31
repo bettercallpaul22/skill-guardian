@@ -93,7 +93,7 @@ const Login: React.FC = () => {
 
 
                     <Group justify="center" mt="md">
-                        <Button loading={isLoading} type="submit">Login</Button>
+                        <Button disabled={isLoading}  type="submit">{isLoading ? "Submitting" : "Login"}</Button>
                     </Group>
                 </form>
                 <div className="have-account">
