@@ -18,7 +18,7 @@ const enviroment: Enviroment = {
 const baseQuery = fetchBaseQuery({
     baseUrl: enviroment.production,
     credentials: "include",
-    mode: "cors",
+    mode: "no-cors",
 
     //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
