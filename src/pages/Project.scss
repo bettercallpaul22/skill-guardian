@@ -14,17 +14,58 @@
 
 }
 
-//from 600px and above
-@media (min-width: 600px) {
-    .project-main-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card{
-        max-width: 300px;
-    }
+.card{
+    cursor: pointer;
 }
 
+// .card {
+//     height: 250px;
+//     width: 250px;
+//     background-color: palevioletred;
+
+//     .image-container {
+//         background-color: yellowgreen;
+//         flex: 2;
+//     }
+
+//     .image{
+//         height: 166.6px;
+//         width: 100%;
+//     }
+
+//     .info-container {
+//         background-color: gold;
+//         flex: 1;
+//     }
+// }
+
+// //from 600px and above
+// @media (min-width: 600px) {
+//     .project-main-container {
+//         grid-template-columns: repeat(2, 1fr);
+//     }
+
+//     .card {
+//         max-width: 300px;
+//     }
+// }
+.bottom-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: -20px;
+}
+
+.price{
+    font-weight: 500;
+    font-size: small;
+    color: gray;
+}
 
 
 //from 900px and above
@@ -33,10 +74,10 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
 //from 1020px and above
 @media (min-width: 1020px) {
     .project-main-container {
         grid-template-columns: repeat(4, 1fr);
     }
 }
-

@@ -1,0 +1,350 @@
+.main-home-page {
+    margin-top: 40px;
+
+
+
+    .image-background {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        height: 500px;
+        width: 100%;
+
+        @media screen and (min-width: 768px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+    }
+
+    .download-container {
+        background-color: whitesmoke;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        height: 80px;
+        padding: 20px;
+
+    }
+
+    .download-btn {
+        background: url("../assets/images/playstore.png") no-repeat scroll 0 0 transparent;
+        color: #000000;
+        cursor: pointer;
+        font-weight: bold;
+        background-size: contain;
+        width: 125px;
+    }
+
+    .download-btn2 {
+        background: url("../assets/images/applestore.png") no-repeat scroll 0 0 transparent;
+        color: #000000;
+        cursor: pointer;
+        font-weight: bold;
+        background-size: contain;
+        width: 125px;
+    }
+
+    .testimonial-slider {
+        // height: 100;
+        // background-color: palevioletred;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-left: 50px;
+        padding-right: 50px;
+        gap: 20px;
+        margin-bottom: 30px;
+
+    }
+
+
+
+    .mobile-search {
+        display: none;
+    }
+
+    .desktop-search {
+        display: none;
+    }
+
+    .info-section {
+        display: none;
+    }
+
+
+
+    //  .footer-mobile {
+    //  display: none;
+    //  }
+    //  .footer-desktop {
+    //  display: none;
+    //  }
+    .get-started-m {
+        display: none;
+    }
+
+
+
+
+    // MOBILE SCREEN
+    @media screen and (max-width: 768px) {
+        .mobile-search {
+            display: block;
+            // background-color: burlywood;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box-holder {
+            // background-color: whitesmoke;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search {
+            width: 100%;
+            // margin-bottom: 15px;
+        }
+
+        .get-help-btn {
+            width: 100%;
+
+        }
+
+        .btn {
+            border: 1px solid gray;
+            color: black;
+            width: 100%;
+
+        }
+
+        .btn:hover {
+            background-color: #1C7ED6;
+            color: white;
+            width: 100%;
+
+        }
+
+        .info-section {
+            display: flex;
+            margin-bottom: 50px;
+            flex-direction: column;
+
+
+            .left {
+                background-color: whitesmoke;
+                flex: 1;
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+
+            .right {
+                flex: 1;
+                min-height: 400px;
+
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+
+
+        .get-started-m {
+            display: block;
+
+            .header {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: whitesmoke;
+
+            }
+
+            .section {
+                display: flex;
+                flex-direction: column;
+
+            }
+
+            .left {
+                flex: 1;
+                height: 300px;
+                // background-color: yellowgreen;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background-color: whitesmoke;
+
+            }
+
+            .right {
+                flex: 1;
+                height: 300px;
+                // background-color: yellow;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background-color: whitesmoke;
+
+
+            }
+        }
+
+        // .footer-mobile {
+        //     display: block;
+        //     }
+    }
+
+
+
+    // DESKTOP SCREEN
+    @media screen and (min-width: 768px) {
+        .desktop-search {
+            display: block;
+            min-height: 300px;
+            width: 600px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .sub-title {
+            text-align: center;
+            color: gray;
+        }
+
+        .search-btn-option {
+            display: flex;
+            gap: 10px;
+
+        }
+
+        .search {
+            flex: 3
+        }
+
+        .get-help-btn {
+            flex: 1
+        }
+
+        .skill-container {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-btn {
+            border: 1px solid gray;
+            color: black;
+        }
+
+        .skill-btn:hover {
+            background-color: #1C7ED6;
+            color: white;
+        }
+
+        .info-section {
+            display: flex;
+            margin-bottom: 50px;
+
+
+            .left {
+                background-color: whitesmoke;
+                flex: 1;
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+
+            .right {
+                background-color: teal;
+                flex: 1;
+                min-height: 400px;
+
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+        .get-started-m {
+            display: block;
+
+            .divider {
+                display: none;
+            }
+
+            .header {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: whitesmoke;
+
+            }
+
+            .section {
+                display: flex;
+                // flex-direction: column;
+
+            }
+
+            .info {
+                text-align: center;
+                max-width: 270px;
+            }
+
+            .left {
+                flex: 1;
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 350px;
+                background-color: whitesmoke;
+                // padding: 20px;
+            }
+
+            .right {
+                flex: 1;
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 350px;
+                background-color: whitesmoke;
+
+            }
+        }
+
+    }
+
+}

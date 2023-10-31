@@ -1,0 +1,42 @@
+.testimony-box {
+    display: flex;
+    height: 100px;
+    max-width: 550px;
+    gap: 5px;
+    padding-top: 3px;
+
+}
+
+.avatar-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .avatar {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+}
+
+.right-side {
+    flex: 7;
+}
+
+.header {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    gap: 5px;
+}
+
+.body {
+    font-size: 12px;
+    margin-top: -3px;
+    font-weight: 600;
+}
+
+.task-type {
+    margin-top: -10px;
+    color: green;
+}

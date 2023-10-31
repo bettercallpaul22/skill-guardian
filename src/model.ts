@@ -48,23 +48,14 @@ export interface MyChatResponse {
 }
 
 export interface User {
-
     _id: string;
     createdAt: string;
     firstName: string;
     lastName: string;
     email: string;
     age: number;
-    height: number;
-    orientation_: string;
-    bodyType: string;
-    ethnicity: string;
-    hasChildren: string;
-    genderInterest: string;
-    religion: string;
-    followers: string[];
-    following: string[];
     about: string;
+    charges: string;
     gender: string;
     avatar: string;
     city: string;

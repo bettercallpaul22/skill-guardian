@@ -33,7 +33,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url:`api/user/update-skill/${authService.getUserId()}`,
                 method:"PUT",
                 body,
-                     
+                 
              })
         }),
     })

@@ -3,6 +3,7 @@ import { Box, Button, Group, Progress, TextInput } from '@mantine/core';
 import "./TaskForm.scss"
 import { useForm } from '@mantine/form';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useGetAllUsersQuery } from '../services/api/userApiSlice';
 
 
 interface SkillType {
@@ -15,6 +16,8 @@ const TaskForm: React.FC = () => {
 
   const [skill, setSkill] = useState("")
   const { state } = useLocation()
+  const [taskLocation, setTaskLocation] = useState("")
+  const {isLoading, data} = useGetAllUsersQuery()
 
   const autoCompleteRef:any = useRef();
   const inputRef:any = useRef();
@@ -27,6 +30,7 @@ const TaskForm: React.FC = () => {
    autoCompleteRef.current.addListener("place_changed", async function () {
     const place = await autoCompleteRef.current.getPlace();
     // console.log({ place });
+    setTaskLocation(place?.formatted_address)
    });
   }, []);
  
@@ -50,8 +54,8 @@ const TaskForm: React.FC = () => {
   });
 
 
-  // console.log("geocodeByAddress", geocodeByAddress)
-  // console.log("addresss", addresss)
+  console.log("task place", taskLocation)
+  console.log("all user", data)
   return (
     <div className='main-task ' style={{marginTop:40}}>
       {/* <Button className="help">Help</Button> */}
@@ -95,15 +99,16 @@ const TaskForm: React.FC = () => {
 
                   {...form.getInputProps('area')}
                   className='input2'
-                  placeholder='Enter street address'
+                  placeholder='Enter State'
                   ref={inputRef}
+                
                 />
                
                 <input
                   type="text"
                   className={form.values.street.length > 0 ? "input" : "input2"}
                   placeholder="Your task location"
-                  {...form.getInputProps('street')}
+                  // {...form.getInputProps('street')}
 
                 />
 

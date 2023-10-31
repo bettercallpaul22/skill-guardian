@@ -1,9 +1,8 @@
 import {
-  TextInput, Avatar, Textarea, Button, Select, NumberInput,
-  UnstyledButton,
-  Text
+  TextInput, Avatar, Textarea, Button,  Select, NumberInput,
+ UnstyledButton
 } from '@mantine/core';
-import "./SkillProfile.scss"
+import "./ProfileUpdate.scss"
 import { statesData } from '../assets/statesData';
 import { RegisterResponse, StatesData, User } from '../model';
 import { skillData } from '../assets/skillData';
@@ -19,17 +18,17 @@ import { AuthService } from '../services/authServices';
 import { useNavigate } from 'react-router-dom';
 import { bank_list } from '../assets/bank_list';
 
-interface BankTypes {
-  id: string;
-  name: string;
-  code: string;
+interface BankTypes{
+  id:string;
+  name:string;
+  code:string;
 }
 
 
 
 
 
-const SkillProfile = () => {
+const ProfileUpdate = () => {
   const authService = new AuthService();
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -49,70 +48,27 @@ const SkillProfile = () => {
   const [guarantorNumber, setGuarantorNumber] = useState("")
   const [bankName, setBankName] = useState("")
   const [mobileNumber, setMobileNumber] = useState("")
-  const [stateErr, setStateErr] = useState("")
-  const [mobileNumErr, setMobileNumErr] = useState("")
-  const [guarantorNameErr, setGuarantorNameErr] = useState("")
-  const [skillErr, setSkillErr] = useState("")
-  const [bankNameErr, SetBankNameErr] = useState("")
-  const [accNumberErr, setAccNumberErr] = useState("")
-  const [guarantorNumberErr, setGuarantorNumberErr] = useState("")
-  const [cahargesErr, setChargesErr] = useState("")
-  const [bvnErr, setBvnErr] = useState("")
 
-  // useEffect(() => {
-  //   setAvatar(current_user?.avatar)
-  //   setState(current_user?.state)
-  //   setSkill(current_user?.skills)
-  //   setBvn(current_user?.bvn)
-  //   setAccNumber(current_user?.bank_number)
-  //   setCharges(current_user?.charges)
-  //   setGuarantorName(current_user?.guarantor_name)
-  //   setAbout(current_user?.about)
-  //   setGuarantorNumber(current_user?.guarantor_number)
-  //   setBankName(current_user?.bank_name)
-  //   setMobileNumber(current_user?.mobile_number)
-  // }, [current_user])
-  const validateInput = () => {
-    if (!state) return setStateErr("please select a state")
-    if (!skill) return setSkillErr("please select a skill")
-    if (bvn.length < 11) return setBvnErr("please fill in 11 digit bvn numbers")
-    if (accNumber.length < 10) return setAccNumberErr("please fill in 11 digit account numbers")
-    if (!bankName) return SetBankNameErr("please select prefered bank name")
-    if (!charges) return setChargesErr("please fill in your charges")
-    if (guarantorName.length < 5) return setGuarantorNameErr("please fill in your guarantor's name")
-    if (guarantorNumber.length < 10) return setGuarantorNumberErr("please fill in your guarantor's number")
-    if (mobileNumber.length < 10) return setMobileNumErr("please fill in your guarantor's number")
-  }
+  useEffect(() => {
+    setAvatar(current_user?.avatar)
+    setState(current_user?.state)
+    setSkill(current_user?.skills)
+    setBvn(current_user?.bvn)
+    setAccNumber(current_user?.bank_number)
+    setCharges(current_user?.charges)
+    setGuarantorName(current_user?.guarantor_name)
+    setAbout(current_user?.about)
+    setGuarantorNumber(current_user?.guarantor_number)
+    setBankName(current_user?.bank_name)
+    setMobileNumber(current_user?.mobile_number)
+  }, [current_user])
+
 
 
 
 
 
   const handleSubmit = async () => {
-    const validateInput = () => {
-      if (!state) return setStateErr("please select a state")
-      if (!skill) return setSkillErr("please select a skill")
-      if (bvn.length < 11) return setBvnErr("please fill in 11 digit bvn numbers")
-      if (accNumber.length < 10) return setAccNumberErr("please fill in 11 digit account numbers")
-      if (!bankName) return SetBankNameErr("please select prefered bank name")
-      if (!charges) return setChargesErr("please fill in your charges")
-      if (guarantorName.length < 5) return setGuarantorNameErr("please fill in your guarantor's name")
-      if (guarantorNumber.length < 10) return setGuarantorNumberErr("please fill in your guarantor's number")
-      if (mobileNumber.length < 10) return setMobileNumErr("please fill in your guarantor's number")
-    }
-
-    if(
-      stateErr ||
-      skillErr ||
-      bvnErr ||
-      accNumberErr ||
-      bankNameErr ||
-      cahargesErr ||
-      guarantorNameErr ||
-      guarantorNumberErr ||
-      mobileNumErr
-    ) return 
-
     const userData = {
       avatar,
       state,
@@ -161,11 +117,8 @@ const SkillProfile = () => {
 
   }
 
-
- 
-
   return (
-    <div className="skill-profile-form-container">
+    <div className="profile-update-form-container">
       <div className="wrapper">
         <div className="avatar-box" style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
           <div className="imagePreview">
@@ -179,11 +132,7 @@ const SkillProfile = () => {
             />
           </div>
         </div>
-        <h4 style={{ textAlign: "center" }}>UPDATE YOUR SKILL</h4>
-        <h4 style={{ textAlign: "center", maxWidth: 300, color: "GrayText", marginTop: -20 }}>
-          Update your skill and become a tasker,
-          so other user can find you in you location.
-        </h4>
+        <h4 style={{ textAlign: "center" }}>PROFILE UPDATE</h4>
 
         <Select
           className="input"
@@ -198,9 +147,6 @@ const SkillProfile = () => {
           value={state}
           onSelect={(event) => setState(event.currentTarget.value)}
         />
-        {stateErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {stateErr}
-        </Text>)}
 
 
         <Select
@@ -216,10 +162,8 @@ const SkillProfile = () => {
           mt="md"
           value={skill}
           onSelect={(event) => setSkill(event.currentTarget.value)}
+
         />
-         {skillErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {skillErr}
-        </Text>)}
 
         <TextInput
           type='text'
@@ -231,9 +175,6 @@ const SkillProfile = () => {
           value={bvn}
           onChange={(event) => setBvn(event.currentTarget.value)}
         />
-         {bvnErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {bvnErr}
-        </Text>)}
 
         <TextInput
           type='text'
@@ -245,11 +186,7 @@ const SkillProfile = () => {
           value={accNumber}
           onChange={(event) => setAccNumber(event.currentTarget.value)}
         />
- {accNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {accNumberErr}
-        </Text>)}
-
-        <Select
+       <Select
           className="input"
           label="Bank Name"
           placeholder="Choose your Bank Name"
@@ -261,10 +198,8 @@ const SkillProfile = () => {
           mt="md"
           value={bankName}
           onSelect={(event) => setBankName(event.currentTarget.value)}
+
         />
-         {bankNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {bankNameErr}
-        </Text>)}
 
         <NumberInput
           description="A client may negociate your charges"
@@ -279,9 +214,6 @@ const SkillProfile = () => {
           value={charges}
           onChange={(val: string) => setCharges(val)}
         />
-         {cahargesErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {cahargesErr}
-        </Text>)}
 
         <Textarea
           className="input"
@@ -293,7 +225,6 @@ const SkillProfile = () => {
           onChange={(event) => setAbout(event.currentTarget.value)}
 
         />
-        
 
         <TextInput
           className="g-input-1 input"
@@ -303,10 +234,8 @@ const SkillProfile = () => {
           withAsterisk
           value={guarantorName}
           onChange={(event) => setGuarantorName(event.currentTarget.value)}
+
         />
-         {guarantorNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {guarantorNameErr}
-        </Text>)}
 
         <MobilNumberInput
           onChange={(val) => { setMobileNumber(val) }}
@@ -314,9 +243,6 @@ const SkillProfile = () => {
           defaultCountry='NG'
           title="Please enter your guarantor's number"
         />
-         {mobileNumErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {mobileNumErr}
-        </Text>)}
 
         <MobilNumberInput
           onChange={(val) => { setGuarantorNumber(val) }}
@@ -324,15 +250,13 @@ const SkillProfile = () => {
           defaultCountry='NG'
           title='Please enter your mobile number'
         />
-         {guarantorNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
-          {guarantorNumberErr}
-        </Text>)}
 
         <Button style={{ minWidth: 400, marginTop: 20 }}
           onClick={() => { handleSubmit() }}
           disabled={isLoading}
+
         >
-          {!isLoading ? "Submit" : "Submiting..."}
+          {!isLoading ? "Update" : "Updating Please wait..."}
         </Button>
 
       </div>
@@ -341,5 +265,5 @@ const SkillProfile = () => {
   );
 }
 
-export default SkillProfile
+export default ProfileUpdate
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Account.scss"
-// import NavBar from '../component/Navbar'
 import { CgProfile } from "react-icons/cg"
 import { RiNotificationBadgeFill } from "react-icons/ri"
 import { FaCcAmazonPay } from "react-icons/fa"
@@ -11,16 +10,10 @@ import { GrTransaction } from "react-icons/gr"
 import { HiMail } from "react-icons/hi"
 import { RiLockPasswordFill, RiDeleteBin5Fill } from "react-icons/ri"
 import { Button, Group, Avatar, NativeSelect, Text } from '@mantine/core'
-import bg from "../assets/pexels-photo-220453.webp"
 import { useDispatch, useSelector } from 'react-redux'
 import { User } from '../model'
 import { logOut, selectCurrentUser } from '../services/features/userSlice'
 import { useNavigate } from 'react-router-dom'
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from 'react-places-autocomplete';
 
 
 const Account: React.FC = () => {
@@ -43,7 +36,11 @@ const Account: React.FC = () => {
           />
           <div className="acc-edit">
             <Text>Account</Text>
-            <Button>EDIT</Button>
+            <Button
+            onClick={()=>{
+              navigate("/profile-update")
+            }}
+            >EDIT</Button>
           </div>
 
           <div className="acc-info">
@@ -115,7 +112,11 @@ const Account: React.FC = () => {
           <div className="right-side">
             <div className="header">
               <p className="title-acc">Account</p>
-              <Button>Edit</Button>
+              <Button
+               onClick={()=>{
+                navigate("/profile-update")
+              }}
+              >Edit</Button>
 
             </div>
 
@@ -135,7 +136,7 @@ const Account: React.FC = () => {
                 </div>
                 <div className="profile-menu">
                   <FaPhoneAlt size={25} />
-                  <p className="">+2348100000000</p>
+                  <p className="">{user?.mobile_number}</p>
                 </div>
                 <Group justify="center" mt="md">
                   <Button

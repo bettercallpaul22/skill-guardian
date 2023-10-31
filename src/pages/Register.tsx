@@ -53,10 +53,11 @@ const Register:React.FC = () => {
 
 
   const handleRegister = async () => {
-    const result = validateForm()
-    if (result) return
+    // const result = validateForm()
+    // if (result) return
     const { firstName, lastName, email, password, mobile_number } = form.values
     try {
+      console.log("register")
       const response:RegisterResponse = await register({ 
         firstName,
          lastName,

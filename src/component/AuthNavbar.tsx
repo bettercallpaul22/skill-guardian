@@ -38,8 +38,8 @@ const AuthNavbar = () => {
                             <NavLink to="/">
                                 <UnstyledButton className={location.pathname !== "/my-task" ? "menu" : "menu-current"}>My Task</UnstyledButton>
                             </NavLink>
-                            <NavLink to="/">
-                                <UnstyledButton className={location.pathname !== "/book-a-task" ? "menu" : "menu-current"}>Book a Task</UnstyledButton>
+                            <NavLink to="/dashboard">
+                                <UnstyledButton className={location.pathname !== "/dashboard" ? "menu" : "menu-current"}>Book a Task</UnstyledButton>
                             </NavLink>
                             <NavLink to={`/account/${authService.getUserId()}`}>
                                 <UnstyledButton className={location.pathname !== `/account/${authService.getUserId()}` ? "menu" : "menu-current"}>Account</UnstyledButton>
@@ -63,7 +63,7 @@ const AuthNavbar = () => {
                 <NavLink to="/" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">My Task</UnstyledButton>
                 </NavLink>
-                <NavLink to="/" className="nav-side-menu" onClick={toggle}>
+                <NavLink to="/dashboard" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">Book a Task</UnstyledButton>
                 </NavLink >
                 <NavLink className="nav-side-menu" to={`/account/${authService.getUserId()}`} onClick={toggle}>
