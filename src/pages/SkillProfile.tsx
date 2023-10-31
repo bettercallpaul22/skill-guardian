@@ -9,7 +9,7 @@ import { RegisterResponse, StatesData, User } from '../model';
 import { skillData } from '../assets/skillData';
 import 'react-phone-input-2/lib/style.css'
 import { useUpdateSkillMutation } from '../services/api/authApiSlice';
-import '@mantine/dropzone/styles.css';
+// import '@mantine/dropzone/styles.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser, setCredientials } from '../services/features/userSlice';
