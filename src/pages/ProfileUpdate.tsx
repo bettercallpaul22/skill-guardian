@@ -17,6 +17,7 @@ import MobilNumberInput from '../component/MobilNumberInput';
 import { AuthService } from '../services/authServices';
 import { useNavigate } from 'react-router-dom';
 import { bank_list } from '../assets/bank_list';
+import axios from 'axios';
 
 interface BankTypes{
   id:string;
@@ -69,6 +70,11 @@ const ProfileUpdate = () => {
 
 
   const handleSubmit = async () => {
+
+
+
+
+
     const userData = {
       avatar,
       state,
@@ -83,14 +89,23 @@ const ProfileUpdate = () => {
 
     }
     try {
-      const response: RegisterResponse = await updateSkill(userData).unwrap()
-      if (response.success === true) {
-        authService.setUserId(response.user._id)
-        authService.setUserDisplayName(response.user.firstName)
-        authService.setUserToken(response.token)
-        dispatch(setCredientials(response))
-        navigate(`/account/${response.user._id}`, { replace: true })
-      }
+      // const config = {
+      //   header:
+      // }
+// const res = await axios.put("http://localhost:5000/api/user/update-skill/652813caffc0337137114fc4", {userData})
+// console.log("axios res", res)
+
+
+
+const response: RegisterResponse = await updateSkill(userData).unwrap()
+if (response.success === true) {
+  authService.setUserId(response.user._id)
+  authService.setUserDisplayName(response.user.firstName)
+  authService.setUserToken(response.token)
+  dispatch(setCredientials(response))
+  // navigate(`/account/${response.user._id}`, { replace: true })
+}
+
     } catch (error) {
       console.log(" update error", error)
     }

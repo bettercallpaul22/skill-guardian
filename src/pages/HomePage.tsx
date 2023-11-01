@@ -28,15 +28,8 @@ const HomePage = () => {
 
     return (
         <div className="main-home-page">
-            <div
-                className="image-background"
-                style={{
-                    backgroundImage: `url(${image})`,
-
-                }}
-            >
-
-                <div className="desktop-search">
+            <div className="img-container" style={{backgroundImage: `url(${image})`,}}>
+            <div className="desktop-search">
                     <div style={{ padding: 20 }}>
 
                         <h1 className="title">Get help. Gain happiness.</h1>
@@ -132,10 +125,68 @@ const HomePage = () => {
                 </div>
             </div>
 
-            <div className="download-container">
-                <Button className="download-btn"></Button>
-                <Button className="download-btn2"></Button>
+             <div className="download-container">
+                 <Button className="download-btn"></Button>
+                 <Button className="download-btn2"></Button>
+             </div>
+           
+
+            {/* <div className="mobile-search">
+                <div className="box-holder" style={{minWidth:500,}}>
+                <h3 className="get-help-header">Get help Gain Happiness.</h3>
+                <h5 className="get-help-sub-header">Just Ask</h5>
+                <Select className="search"
+                    data={skillData?.map((skill: any) => skill.skill)}
+                    searchable
+                    placeholder='Search'
+                    clearable
+                    onSelect={(val: any) => {
+                        setSelectedSkill(val.target.defaultValue)
+                    }}
+                />
+                <Button className="get-help-btn"
+                    onClick={() => {
+                        if (!selectedSkill) return
+                        navigate("/task-form", { state: selectedSkill })
+
+                    }}
+                >
+                    Get Help Today
+                </Button>
+                <Button className="btn"
+                color='transparent'
+                    onClick={() => {
+                        if (!selectedSkill) return
+                        navigate("/task-form", { state: "Help Moving" })
+                    }}
+                >
+                    Help Moving
+                </Button>
+                <Button className="btn"
+                color='transparent'
+                    onClick={() => {
+                        if (!selectedSkill) return
+                        navigate("/task-form", { state: "Electrical" })
+                    }}
+                >
+                    Electrical
+                </Button>
+                <Button className="btn"
+                color='transparent'
+                    onClick={() => {
+                        if (!selectedSkill) return
+                        navigate("/task-form", { state: "ount TV or other items" })
+                    }}
+                >
+                   ount TV or other items
+                </Button>
+                </div>
             </div>
+
+            // <div className="download-container">
+            //     <Button className="download-btn"></Button>
+            //     <Button className="download-btn2"></Button>
+            // </div>
 
             <h2 style={{ paddingLeft: 70 }}>Popular projects in your area</h2>
             <Project />
@@ -241,7 +292,7 @@ const HomePage = () => {
 
                 </div>
             </div>
-            <FooterCentered />
+            <FooterCentered /> */}
 
         </div>
     )

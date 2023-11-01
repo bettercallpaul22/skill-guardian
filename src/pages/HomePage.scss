@@ -1,24 +1,18 @@
 .main-home-page {
+    background-color: yellow;
     margin-top: 40px;
 
-
-
-    .image-background {
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+    .img-container {
         height: 500px;
         width: 100%;
-
-        @media screen and (min-width: 768px) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
     }
+
+
 
     .download-container {
         background-color: whitesmoke;
@@ -75,11 +69,11 @@
     .info-section {
         display: none;
     }
-
+    
 
 
     //  .footer-mobile {
-    //  display: none;
+        //  display: none;
     //  }
     //  .footer-desktop {
     //  display: none;
@@ -87,12 +81,17 @@
     .get-started-m {
         display: none;
     }
-
-
-
-
+    
     // MOBILE SCREEN
-    @media screen and (max-width: 768px) {
+    @media screen and (max-device-width:640px) {
+
+        .img-container {
+            height: 250px;
+            width: 100%;
+
+
+        }
+
         .mobile-search {
             display: block;
             // background-color: burlywood;
@@ -214,6 +213,134 @@
         //     }
     }
 
+    @media screen and (min-device-width:375px) and (max-device-width:480px){
+        .img-container {
+            height: 200px;
+            width: 100%;
+
+
+        }
+
+        .mobile-search {
+            display: block;
+            background-color: plum;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          
+        }
+
+        .box-holder {
+            // background-color: whitesmoke;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search {
+            width: 330px;
+            // margin-bottom: 15px;
+        }
+
+        .get-help-btn {
+            width: 330px;
+
+
+        }
+
+        .btn {
+            border: 1px solid gray;
+            color: black;
+            width: 330px;
+
+        }
+
+        .btn:hover {
+            background-color: #1C7ED6;
+            color: white;
+            width: 100%;
+
+        }
+
+        .info-section {
+            display: flex;
+            margin-bottom: 50px;
+            flex-direction: column;
+
+
+            .left {
+                background-color: whitesmoke;
+                flex: 1;
+                min-height: 400px;
+                display: flex;
+                flex-direction: column;
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+
+            .right {
+                flex: 1;
+                min-height: 400px;
+
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+
+
+
+        .get-started-m {
+            display: block;
+
+            .header {
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: whitesmoke;
+
+            }
+
+            .section {
+                display: flex;
+                flex-direction: column;
+
+            }
+
+            .left {
+                flex: 1;
+                height: 300px;
+                // background-color: yellowgreen;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background-color: whitesmoke;
+
+            }
+
+            .right {
+                flex: 1;
+                height: 300px;
+                // background-color: yellow;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                background-color: whitesmoke;
+
+
+            }
+        }
+    }
+
+    
 
 
     // DESKTOP SCREEN

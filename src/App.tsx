@@ -40,7 +40,7 @@ function App() {
 
 
   return (
-    <>
+    <div>
       <Router>
         {/* <AuthNavbar/> */}
         {token ? <AuthNavbar /> : <Navbar />}
@@ -74,7 +74,7 @@ function App() {
           <Route path="/profile-update" element={<ProfileUpdate />} /> 
         </Routes> */}
 
-    </>
+    </div>
   );
 }
 

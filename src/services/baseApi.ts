@@ -16,21 +16,17 @@ const enviroment: Enviroment = {
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: enviroment.production,
+    baseUrl: enviroment.development,
     credentials: "include",
-    mode: "no-cors",
+    mode: "cors",
 
-    //prepared headers function recieve the headers and destructure getsate from it
     prepareHeaders: (headers, { getState }) => {
         let state: any = getState()
         const token = authService.getUserToken()
         if (token) {
             headers.set("authorization", `Bearer ${token}`)
-            // headers.set("Access-Control-Allow-Origin","*")
         }
-        // if (state.auth.token) {
-        //     headers.set("authorization", `Bearer ${state.auth.token}`)
-        // }
+     
         return headers
     }
 })
