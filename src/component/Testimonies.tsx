@@ -24,10 +24,8 @@ const Testimonies = () => {
                         <AiTwotoneStar color='green' />
                     </div>
                     <p className="body">
-                        Profile photo for Donald L.
-                        Donald L.
                         "Nick did an outstanding job assembling my patio heater,
-                        and he got it done faster than I could have imagined. He also has a very pleasan..."
+                        and he got it done faster than I could have imagined. 
                         September 30, 2019, SF Bay Area
                     </p>
                     <h5 className='task-type'>Help Moving</h5>
