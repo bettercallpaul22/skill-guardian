@@ -117,8 +117,8 @@
         }
 
         .btn:hover {
-            background-color: #1C7ED6;
-            color: white;
+            background-color: whitesmoke;
+            color: black;
             width: 100%;
 
         }
@@ -524,16 +524,11 @@
         }
 
 
-
-
-        // .footer-mobile {
-        //     display: block;
-        //     }
     }
 
 
     // DESKTOP SCREEN
-    @media screen and (min-width:641px)  {
+    @media screen and (min-width:641px) {
         .img-container {
             height: 500px;
             width: 100%;
@@ -592,84 +587,137 @@
             color: white;
         }
 
-        .info-section {
+        .info-section-wrapper {
             display: flex;
-            margin-bottom: 50px;
-
-
-            .left {
-                background-color: whitesmoke;
-                flex: 1;
-                min-height: 400px;
-                display: flex;
-                flex-direction: column;
-                padding-left: 100px;
-                padding-right: 100px;
-            }
-
-            .right {
-                background-color: teal;
-                flex: 1;
-                min-height: 400px;
-
-            }
-
-            .item {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
+            flex-direction: column;
         }
 
+        .info-section {
+            width: 100%;
+            display: flex;
+            margin-bottom: 50px;
+            // flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+
+
+
+            .info-made-easier-header {
+                width: 350px;
+                text-align: center;
+            }
+
+
+            .sub-info-text {
+                width: 350px;
+                text-align: center;
+            }
+
+            .sub-info-text-item {
+                width: 350px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                gap: 5px;
+            }
+
+            .left-img {
+                height: 300px;
+                width: 350px;
+                background-size: cover;
+                border-radius: 5px;
+            }
+
+
+        }
+
+
+
+        .testimonial-slider-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            .header-sub-title {
+                text-align: center;
+                max-width: 300px;
+                margin-top: -10px;
+            }
+
+            .testimonial-slider {
+                display: flex;
+
+                align-items: center;
+                gap: 40px;
+            }
+
+
+
+        }
+
+
+       
         .get-started-m {
             display: block;
-
-            .divider {
-                display: none;
-            }
 
             .header {
                 height: 60px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: whitesmoke;
 
             }
 
             .section {
                 display: flex;
                 // flex-direction: column;
+                align-items: center;
 
+            }
+
+            .img-container {
+                height: 100px;
+                width: 100px;
+
+                .img {
+                    height: 100%;
+                    width: 100%;
+                }
             }
 
             .info {
                 text-align: center;
-                max-width: 270px;
+                font-size: 16px;
             }
 
             .left {
                 flex: 1;
                 height: 300px;
+                // background-color: yellowgreen;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                height: 350px;
+                padding: 20px;
                 background-color: whitesmoke;
-                // padding: 20px;
+
             }
 
             .right {
                 flex: 1;
                 height: 300px;
+                // background-color: yellow;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                height: 350px;
+                padding: 20px;
                 background-color: whitesmoke;
+
 
             }
         }
+
 
     }
 

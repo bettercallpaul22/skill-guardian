@@ -132,66 +132,102 @@ const HomePage = () => {
                 <Button className="download-btn"></Button>
                 <Button className="download-btn2"></Button>
             </div>
+            <div className="info-section-wrapper">
 
-            <div className="info-section">
-                <h3 className="info-made-easier-header">Everyday life made easier</h3>
-                <p className="sub-info-text">
-                    When life gets busy, you don’t have to tackle it alone.
-                    Get time back for what you love without breaking the bank.
-                </p>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
+                <div className="info-section">
+                    <div data-aos="fade-in">
+                        <h3 className="info-made-easier-header">Everyday life made easier</h3>
+                        <p className="sub-info-text">
+                            When life gets busy, you don’t have to tackle it alone.
+                            Get time back for what you love without breaking the bank.
+                        </p>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Schedule when it works for you — as early as today</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item" >
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                    </div>
+                    <div
+                        className="left-img"
+                        data-aos="fade-in"
+                        style={{ backgroundImage: `url(${image2})`, }}
+                    >
+                    </div>
                 </div>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Schedule when it works for you — as early as today</p>
+                <div className="info-section">
+                    <div >
+                        <h3 className="info-made-easier-header">Everyday life made easier</h3>
+                        <p className="sub-info-text">
+                            When life gets busy, you don’t have to tackle it alone.
+                            Get time back for what you love without breaking the bank.
+                        </p>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Schedule when it works for you — as early as today</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item" >
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                    </div>
+                    <div
+                        className="left-img"
+                        data-aos="fade-in"
+                        style={{ backgroundImage: `url(${image3})`, }}
+                    >
+                    </div>
                 </div>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
-                </div>
-                <div className="sub-info-text-item" >
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
-                </div>
-                <div className="left-img"
-                    data-aos="fade-in"
 
-                    style={{ backgroundImage: `url(${image2})`, }}>
 
-                </div>
-            </div>
+                {/* <div className="info-section2" >
+                    <div>
+                        <h3 className="info-made-easier-header">Everyday life made easier</h3>
+                        <p className="sub-info-text">
+                            When life gets busy, you don’t have to tackle it alone.
+                            Get time back for what you love without breaking the bank.
+                        </p>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Schedule when it works for you — as early as today</p>
+                        </div>
+                        <div className="sub-info-text-item">
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="sub-info-text-item" >
+                            <BiSolidCheckCircle />
+                            <p>Choose your Tasker by reviews, skills, and price</p>
+                        </div>
+                        <div className="left-img"
+                            data-aos="fade-in"
+                            style={{ backgroundImage: `url(${image3})`, }}>
 
-
-            <div className="info-section2" >
-
-                <h3 className="info-made-easier-header">Everyday life made easier</h3>
-                <p className="sub-info-text">
-                    When life gets busy, you don’t have to tackle it alone.
-                    Get time back for what you love without breaking the bank.
-                </p>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
-                </div>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Schedule when it works for you — as early as today</p>
-                </div>
-                <div className="sub-info-text-item">
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
-                </div>
-                <div className="sub-info-text-item" >
-                    <BiSolidCheckCircle />
-                    <p>Choose your Tasker by reviews, skills, and price</p>
-                </div>
-                <div className="left-img"
-                    data-aos="fade-in"
-                    style={{ backgroundImage: `url(${image3})`, }}>
-
-                </div>
+                        </div>
+                    </div>
+                </div> */}
             </div>
 
             <div className="testimonial-slider-container">
@@ -205,7 +241,7 @@ const HomePage = () => {
                     <Testimonies />
                 </div>
             </div>
-            <Project/>
+            <Project />
 
             <div className="get-started-m">
                 <div className="header">
