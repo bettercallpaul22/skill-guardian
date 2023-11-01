@@ -205,8 +205,7 @@ const HomePage = () => {
                     <Testimonies />
                 </div>
             </div>
-
-            <Project />
+            <Project/>
 
             <div className="get-started-m">
                 <div className="header">

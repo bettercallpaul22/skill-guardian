@@ -76,7 +76,7 @@
 
     // MOBILE SCREEN
 
-    @media screen and (min-device-width:375px) and (max-device-width:480px) {
+    @media screen and (min-width:375px) and (max-width:480px) {
         .img-container {
             height: 250px;
             width: 100%;
@@ -268,16 +268,17 @@
 
             }
 
-            .img-container{
+            .img-container {
                 height: 100px;
                 width: 100px;
-                .img{
+
+                .img {
                     height: 100%;
                     width: 100%;
                 }
             }
 
-            .info{
+            .info {
                 text-align: center;
                 font-size: 16px;
             }
@@ -314,12 +315,14 @@
 
 
     // MOBILE SCREEN
-    @media screen and (min-device-width:480px) and (max-device-width:640px) {
+    @media screen and (min-width:481px) and (max-width:640px) {
+        // @media screen and (min-device-width:480px) and (max-device-width:640px) {
+        overflow-x: hidden;
 
         .img-container {
             height: 250px;
             width: 100%;
-
+            overflow-x: hidden;
 
         }
 
@@ -332,7 +335,6 @@
         }
 
         .box-holder {
-            background-color: palevioletred;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -367,35 +369,100 @@
         }
 
         .info-section {
+            width: 100%;
             display: flex;
             margin-bottom: 50px;
             flex-direction: column;
+            align-items: center;
 
 
-            .left {
-                background-color: whitesmoke;
-                flex: 1;
-                min-height: 400px;
-                display: flex;
-                flex-direction: column;
-                padding-left: 100px;
-                padding-right: 100px;
+
+
+            .info-made-easier-header {
+                width: 350px;
+                text-align: center;
             }
 
-            .right {
-                flex: 1;
-                min-height: 400px;
+
+            .sub-info-text {
+                width: 420px;
+                text-align: center;
+                font-weight: 600;
 
             }
 
-            .item {
+            .sub-info-text-item {
+                width: 400px;
+                text-align: center;
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                font-size: 16px;
+                gap: 5px;
             }
+
+            .left-img {
+                height: 300px;
+                width: 400px;
+                background-size: cover;
+                border-radius: 5px;
+            }
+
+
         }
 
+        .info-section2 {
+            width: 100%;
+            display: flex;
+            margin-bottom: 50px;
+            flex-direction: column;
+            align-items: center;
 
+
+
+
+            .info-made-easier-header {
+                width: 350px;
+                text-align: center;
+            }
+
+
+            .sub-info-text {
+                width: 420px;
+                text-align: center;
+                font-weight: 600;
+
+            }
+
+            .sub-info-text-item {
+                width: 400px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                gap: 5px;
+            }
+
+            .left-img {
+                height: 300px;
+                width: 400px;
+                background-size: cover;
+                border-radius: 5px;
+            }
+
+
+        }
+
+        .testimonial-slider-container {
+
+            .header-title {
+                text-align: center;
+            }
+
+            .header-sub-title {
+                text-align: center;
+            }
+
+        }
 
         .get-started-m {
             display: block;
@@ -405,14 +472,29 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: whitesmoke;
 
             }
 
             .section {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
 
+            }
+
+            .img-container {
+                height: 100px;
+                width: 100px;
+
+                .img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .info {
+                text-align: center;
+                font-size: 16px;
             }
 
             .left {
@@ -441,6 +523,9 @@
             }
         }
 
+
+
+
         // .footer-mobile {
         //     display: block;
         //     }
@@ -448,7 +533,7 @@
 
 
     // DESKTOP SCREEN
-    @media screen and (min-device-width: 768px) {
+    @media screen and (min-width:641px)  {
         .img-container {
             height: 500px;
             width: 100%;
