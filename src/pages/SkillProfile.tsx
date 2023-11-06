@@ -18,6 +18,9 @@ import MobilNumberInput from '../component/MobilNumberInput';
 import { AuthService } from '../services/authServices';
 import { useNavigate } from 'react-router-dom';
 import { bank_list } from '../assets/bank_list';
+import { update_profile } from '../services2/features/userSlice';
+import { useAppDispatch, useAppSelector } from '../services2/hooks';
+import LoadingOverlayComp from '../component/LoadingOverlay';
 
 interface BankTypes {
   id: string;
@@ -31,10 +34,9 @@ interface BankTypes {
 
 const SkillProfile = () => {
   const authService = new AuthService();
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const current_user: User = useSelector(selectCurrentUser)
-  const [updateSkill, { isLoading }] = useUpdateSkillMutation()
+  const { loading, error } = useAppSelector((state) => state.user)
 
 
 
@@ -59,19 +61,6 @@ const SkillProfile = () => {
   const [cahargesErr, setChargesErr] = useState("")
   const [bvnErr, setBvnErr] = useState("")
 
-  // useEffect(() => {
-  //   setAvatar(current_user?.avatar)
-  //   setState(current_user?.state)
-  //   setSkill(current_user?.skills)
-  //   setBvn(current_user?.bvn)
-  //   setAccNumber(current_user?.bank_number)
-  //   setCharges(current_user?.charges)
-  //   setGuarantorName(current_user?.guarantor_name)
-  //   setAbout(current_user?.about)
-  //   setGuarantorNumber(current_user?.guarantor_number)
-  //   setBankName(current_user?.bank_name)
-  //   setMobileNumber(current_user?.mobile_number)
-  // }, [current_user])
   const validateInput = () => {
     if (!state) return setStateErr("please select a state")
     if (!skill) return setSkillErr("please select a skill")
@@ -101,7 +90,7 @@ const SkillProfile = () => {
       if (mobileNumber.length < 10) return setMobileNumErr("please fill in your guarantor's number")
     }
 
-    if(
+    if (
       stateErr ||
       skillErr ||
       bvnErr ||
@@ -111,7 +100,7 @@ const SkillProfile = () => {
       guarantorNameErr ||
       guarantorNumberErr ||
       mobileNumErr
-    ) return 
+    ) return
 
     const userData = {
       avatar,
@@ -127,14 +116,14 @@ const SkillProfile = () => {
 
     }
     try {
-      const response: RegisterResponse = await updateSkill(userData).unwrap()
+
+      const response: any = await dispatch(update_profile(userData)).unwrap()
       if (response.success === true) {
-        authService.setUserId(response.user._id)
-        authService.setUserDisplayName(response.user.firstName)
-        authService.setUserToken(response.token)
-        dispatch(setCredientials(response))
-        navigate(`/account/${response.user._id}`, { replace: true })
+        navigate(`/dashboard`, { replace: true })
       }
+
+
+
     } catch (error) {
       console.log(" update error", error)
     }
@@ -162,10 +151,13 @@ const SkillProfile = () => {
   }
 
 
- 
+
 
   return (
     <div className="skill-profile-form-container">
+      <LoadingOverlayComp
+      status={loading}
+      />
       <div className="wrapper">
         <div className="avatar-box" style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
           <div className="imagePreview">
@@ -217,7 +209,7 @@ const SkillProfile = () => {
           value={skill}
           onSelect={(event) => setSkill(event.currentTarget.value)}
         />
-         {skillErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {skillErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {skillErr}
         </Text>)}
 
@@ -231,7 +223,7 @@ const SkillProfile = () => {
           value={bvn}
           onChange={(event) => setBvn(event.currentTarget.value)}
         />
-         {bvnErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {bvnErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {bvnErr}
         </Text>)}
 
@@ -245,7 +237,7 @@ const SkillProfile = () => {
           value={accNumber}
           onChange={(event) => setAccNumber(event.currentTarget.value)}
         />
- {accNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {accNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {accNumberErr}
         </Text>)}
 
@@ -262,7 +254,7 @@ const SkillProfile = () => {
           value={bankName}
           onSelect={(event) => setBankName(event.currentTarget.value)}
         />
-         {bankNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {bankNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {bankNameErr}
         </Text>)}
 
@@ -279,7 +271,7 @@ const SkillProfile = () => {
           value={charges}
           onChange={(val: string) => setCharges(val)}
         />
-         {cahargesErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {cahargesErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {cahargesErr}
         </Text>)}
 
@@ -293,7 +285,7 @@ const SkillProfile = () => {
           onChange={(event) => setAbout(event.currentTarget.value)}
 
         />
-        
+
 
         <TextInput
           className="g-input-1 input"
@@ -304,7 +296,7 @@ const SkillProfile = () => {
           value={guarantorName}
           onChange={(event) => setGuarantorName(event.currentTarget.value)}
         />
-         {guarantorNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {guarantorNameErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {guarantorNameErr}
         </Text>)}
 
@@ -314,7 +306,7 @@ const SkillProfile = () => {
           defaultCountry='NG'
           title="Please enter your guarantor's number"
         />
-         {mobileNumErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {mobileNumErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {mobileNumErr}
         </Text>)}
 
@@ -324,15 +316,14 @@ const SkillProfile = () => {
           defaultCountry='NG'
           title='Please enter your mobile number'
         />
-         {guarantorNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
+        {guarantorNumberErr && (<Text style={{ color: "red", fontSize: 14, paddingTop: 0, minWidth: 400 }}>
           {guarantorNumberErr}
         </Text>)}
 
         <Button style={{ minWidth: 400, marginTop: 20 }}
           onClick={() => { handleSubmit() }}
-          disabled={isLoading}
         >
-          {!isLoading ? "Submit" : "Submiting..."}
+          {!loading ? "Submit" : "Submiting..."}
         </Button>
 
       </div>
