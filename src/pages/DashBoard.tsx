@@ -14,12 +14,15 @@ import { AuthService } from "../services/authServices";
 
 
 const DashBoard = () => {
-window.location.reload()
 
     const authService = new AuthService();
     useLayoutEffect(() => {
         !authService.getUserToken() && window.location.replace('/')
     }, [])
+    
+    useEffect(() => {
+        window.location.reload()
+    }, [authService.getUserToken()])
 
     useEffect(() => {
         AOS.init({ duration: 1000 })
@@ -199,7 +202,7 @@ window.location.reload()
                 </div>
             </div>
 
-         
+
             <FooterCentered />
         </div>
     )
