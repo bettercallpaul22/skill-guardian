@@ -1,6 +1,7 @@
 import {
-  TextInput, Avatar, Textarea, Button,  Select, NumberInput,
- UnstyledButton
+  TextInput, Avatar, Textarea, Button, Select, NumberInput,
+  UnstyledButton,
+  LoadingOverlay
 } from '@mantine/core';
 import "./ProfileUpdate.scss"
 import { statesData } from '../assets/statesData';
@@ -18,11 +19,15 @@ import { AuthService } from '../services/authServices';
 import { useNavigate } from 'react-router-dom';
 import { bank_list } from '../assets/bank_list';
 import axios from 'axios';
+import { update_profile } from '../services2/features/userSlice';
+import { useAppDispatch, useAppSelector } from '../services2/hooks';
+import { get_my_profile } from '../services2/features/userSlice';
+import LoadingOverlayComp from '../component/LoadingOverlay';
 
-interface BankTypes{
-  id:string;
-  name:string;
-  code:string;
+interface BankTypes {
+  id: string;
+  name: string;
+  code: string;
 }
 
 
@@ -30,25 +35,43 @@ interface BankTypes{
 
 
 const ProfileUpdate = () => {
-  const authService = new AuthService();
-  const dispatch = useDispatch()
+  const {loading, error, user:current_user} = useAppSelector((state)=>state.user)
+
+
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const current_user: User = useSelector(selectCurrentUser)
+  // const current_user: User = useSelector(selectCurrentUser)
   const [updateSkill, { isLoading }] = useUpdateSkillMutation()
 
 
 
-  const [avatar, setAvatar] = useState("")
-  const [state, setState] = useState("")
-  const [skill, setSkill] = useState("")
-  const [bvn, setBvn] = useState("")
-  const [accNumber, setAccNumber] = useState("")
-  const [charges, setCharges] = useState("")
-  const [guarantorName, setGuarantorName] = useState("")
-  const [about, setAbout] = useState("")
-  const [guarantorNumber, setGuarantorNumber] = useState("")
-  const [bankName, setBankName] = useState("")
-  const [mobileNumber, setMobileNumber] = useState("")
+  const [avatar, setAvatar] = useState<any>("")
+  const [state, setState] = useState<any>("")
+  const [skill, setSkill] = useState<any>("")
+  const [bvn, setBvn] = useState<any>("")
+  const [accNumber, setAccNumber] = useState<any>("")
+  const [charges, setCharges] = useState<any>("")
+  const [guarantorName, setGuarantorName] = useState<any>("")
+  const [about, setAbout] = useState<any>("")
+  const [guarantorNumber, setGuarantorNumber] = useState<any>("")
+  const [bankName, setBankName] = useState<any>("")
+  const [mobileNumber, setMobileNumber] = useState<any>("")
+
+
+  const getMe = async () => {
+    try{
+      const res = await dispatch(get_my_profile()).unwrap()
+
+    }
+    catch(err){
+
+    }
+
+  }
+
+  useEffect(() => {
+    getMe()
+  }, [])
 
   useEffect(() => {
     setAvatar(current_user?.avatar)
@@ -65,15 +88,7 @@ const ProfileUpdate = () => {
   }, [current_user])
 
 
-
-
-
-
   const handleSubmit = async () => {
-
-
-
-
 
     const userData = {
       avatar,
@@ -89,22 +104,11 @@ const ProfileUpdate = () => {
 
     }
     try {
-      // const config = {
-      //   header:
-      // }
-// const res = await axios.put("http://localhost:5000/api/user/update-skill/652813caffc0337137114fc4", {userData})
-// console.log("axios res", res)
 
-
-
-const response: RegisterResponse = await updateSkill(userData).unwrap()
-if (response.success === true) {
-  authService.setUserId(response.user._id)
-  authService.setUserDisplayName(response.user.firstName)
-  authService.setUserToken(response.token)
-  dispatch(setCredientials(response))
-  // navigate(`/account/${response.user._id}`, { replace: true })
-}
+      const response:any = await dispatch(update_profile(userData)).unwrap()
+      if (response.success === true) {
+      navigate(`/account/${response.user._id}`, { replace: true })
+      }
 
     } catch (error) {
       console.log(" update error", error)
@@ -132,8 +136,13 @@ if (response.success === true) {
 
   }
 
+
+
   return (
     <div className="profile-update-form-container">
+      <LoadingOverlayComp
+      status={loading}
+      />
       <div className="wrapper">
         <div className="avatar-box" style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
           <div className="imagePreview">
@@ -201,7 +210,7 @@ if (response.success === true) {
           value={accNumber}
           onChange={(event) => setAccNumber(event.currentTarget.value)}
         />
-       <Select
+        <Select
           className="input"
           label="Bank Name"
           placeholder="Choose your Bank Name"
@@ -241,7 +250,7 @@ if (response.success === true) {
 
         />
 
-        <TextInput
+        {/* <TextInput
           className="g-input-1 input"
           type='text'
           placeholder="Guarantor's full name"
@@ -250,7 +259,7 @@ if (response.success === true) {
           value={guarantorName}
           onChange={(event) => setGuarantorName(event.currentTarget.value)}
 
-        />
+        /> */}
 
         <MobilNumberInput
           onChange={(val) => { setMobileNumber(val) }}
@@ -259,19 +268,19 @@ if (response.success === true) {
           title="Please enter your guarantor's number"
         />
 
-        <MobilNumberInput
+        {/* <MobilNumberInput
           onChange={(val) => { setGuarantorNumber(val) }}
           value={guarantorNumber}
           defaultCountry='NG'
           title='Please enter your mobile number'
-        />
+        /> */}
 
         <Button style={{ minWidth: 400, marginTop: 20 }}
           onClick={() => { handleSubmit() }}
           disabled={isLoading}
 
         >
-          {!isLoading ? "Update" : "Updating Please wait..."}
+          {!loading ? "Update" : "Updating Please wait..."}
         </Button>
 
       </div>

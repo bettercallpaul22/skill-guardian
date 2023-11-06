@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import "./Account.scss"
 import { CgProfile } from "react-icons/cg"
 import { RiNotificationBadgeFill } from "react-icons/ri"
@@ -9,26 +9,56 @@ import { FaPhoneAlt } from "react-icons/fa"
 import { GrTransaction } from "react-icons/gr"
 import { HiMail } from "react-icons/hi"
 import { RiLockPasswordFill, RiDeleteBin5Fill } from "react-icons/ri"
-import { Button, Group, Avatar, NativeSelect, Text } from '@mantine/core'
-import { useDispatch, useSelector } from 'react-redux'
-import { User } from '../model'
-import { logOut, selectCurrentUser } from '../services/features/userSlice'
+import { Button, Group, Avatar, NativeSelect, Text, LoadingOverlay } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
+import { clearCredientials, getToken, getUser } from '../services2/features/authSlice'
+import { get_current_user, remove_user } from '../services2/features/userSlice'
+import { useAppDispatch, useAppSelector } from '../services2/hooks'
+import { get_my_profile } from '../services2/features/userSlice'
+import { AuthService } from '../services/authServices'
 
 
 const Account: React.FC = () => {
-  const user = useSelector(selectCurrentUser) as User
-  const dispatch = useDispatch()
+const authService = new AuthService()
+  const authUser = useAppSelector(getUser)
+  const {loading, error, user} = useAppSelector((state)=>state.user)
+  const token = useAppSelector(getToken)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+
+  const getMe = async () => {
+    try{
+      const res = await dispatch(get_my_profile()).unwrap()
+
+    }
+    catch(err){
+
+    }
+
+  }
+
+  useLayoutEffect(() => {
+    !authService.getUserToken() && window.location.replace('/dashboard')
+}, [])
+
+  useEffect(() => {
+    getMe()
+  }, [])
+
 
   return (
     <div>
-      {/* <NavBar /> */}
       <div className='account-container'>
-        <div className="title">Account</div>
 
+        {/* MOBILE */}
         <div className="mobile-account">
-        <div className="mobile-account-sub">
+          <LoadingOverlay
+          visible={loading}
+          zIndex={1000}
+          overlayProps={{radius:'sm',blur:2}}
+          loaderProps={{color:'dodgerBlue', type:'bars'}}
+          />
           <NativeSelect
             className='native-select'
             data={['Profile', 'Notification', 'Billing Info', 'Cancel a Task', 'Account Balance', 'Password', 'Delete Account']}
@@ -37,9 +67,9 @@ const Account: React.FC = () => {
           <div className="acc-edit">
             <Text>Account</Text>
             <Button
-            onClick={()=>{
-              navigate("/profile-update")
-            }}
+              onClick={() => {
+                navigate("/profile-update")
+              }}
             >EDIT</Button>
           </div>
 
@@ -53,7 +83,9 @@ const Account: React.FC = () => {
             <Group justify="center" mt="md">
               <Button
                 onClick={() => {
-                  dispatch(logOut())
+                  dispatch(clearCredientials())
+                      dispatch(remove_user())
+
                   navigate("/")
                 }}
               >
@@ -61,10 +93,9 @@ const Account: React.FC = () => {
               </Button>
             </Group>
           </div>
-          </div>
         </div>
 
-
+        {/* DESKTOP */}
         <div className="account-detail-box">
           <div className="left-side">
 
@@ -113,9 +144,9 @@ const Account: React.FC = () => {
             <div className="header">
               <p className="title-acc">Account</p>
               <Button
-               onClick={()=>{
-                navigate("/profile-update")
-              }}
+                onClick={() => {
+                  navigate("/profile-update")
+                }}
               >Edit</Button>
 
             </div>
@@ -141,7 +172,8 @@ const Account: React.FC = () => {
                 <Group justify="center" mt="md">
                   <Button
                     onClick={() => {
-                      dispatch(logOut())
+                      dispatch(clearCredientials())
+                      dispatch(remove_user())
                       navigate("/")
                     }}
                   >

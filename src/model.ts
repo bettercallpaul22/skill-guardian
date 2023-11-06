@@ -1,6 +1,7 @@
 export interface RegisterResponse {
     success: boolean;
     token: string;
+    _id: string;
     user:User
 }
 

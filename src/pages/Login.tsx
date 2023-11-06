@@ -1,4 +1,4 @@
-import { TextInput,  Button, Group, Box, PasswordInput } from '@mantine/core';
+import { TextInput, Button, Group, Box, PasswordInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import "./Login.scss"
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -7,93 +7,103 @@ import { RegisterResponse, User } from '../model';
 import { useLoginMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { setCredientials } from '../services/features/userSlice';
 import jwt_decode from 'jwt-decode'
+import { loginUser } from '../services2/features/authSlice';
+import { useAppDispatch, useAppSelector } from '../services2/hooks';
+import axios from 'axios';
+import LoadingOverlayComp from '../component/LoadingOverlay';
 
 
 
 const Login: React.FC = () => {
-
     const authService = new AuthService()
-    const dispatch = useDispatch()
+    useLayoutEffect(() => {
+        authService.getUserToken() && window.location.replace('/dashboard')
+    }, [])
+
+    const { loading, user, error } = useAppSelector((state) => state.auth)
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const [error, setError] = useState("")
-    const [login, { isLoading }] = useLoginMutation()
+    const [serverError, setServerError] = useState("")
+    const [emailServerErr, setEmailServerError] = useState("")
+    const [emailErr, setEmailError] = useState("")
+    const [passwordErr, setPasswordErr] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
 
-    const form = useForm({
-        initialValues: {
-            email: '',
-            password: '',
-        },
-
-        validate: {
-            email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            password: (value: string) => (value.length < 6 ? "password must me at least 6 characters length" : null),
-        },
-    });
-
-    const validateForm = () => {
-        if (
-            form.errors.email ||
-            form.errors.password ||
-            form.values.email.length < 3 ||
-            form.values.password.length < 6
-        ) return true
+    const validateInput = (value: string) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(value);
     }
 
+
     const handleLogin = async () => {
-        const result = validateForm()
-        if (result) return
-        const { email, password } = form.values
+        if (!password || !email) return;
+        const result = validateInput(email)
+        if (!result) return setEmailError('Input a valid email address')
         try {
-            const response: RegisterResponse = await login({ email, password }).unwrap()
-            if (response.success) {
-                authService.setUserId(response.user._id)
-                authService.setUserDisplayName(response.user.firstName)
-                authService.setUserToken(response.token)
-                const user: User = jwt_decode(response.token)
-                dispatch(setCredientials({ user, token: response.token, _id: user._id }))
-                navigate("/dashboard", { replace: true })
+            const res: RegisterResponse = await dispatch(loginUser({ email, password })).unwrap()
+            if (res.success) {
+                authService.setUserToken(res.token)
+                authService.setUserId(res._id)
+                navigate('/dashboard', { replace: true })
             }
+
         } catch (error: any) {
-            if (error.status === 404) {
-                setError(error.data)
-            } else if (error.status === 401) {
-                setError(error.data.message)
+            if (error.status === 404) { setEmailServerError(error.data) }
+            else if (error.status === 401) {
+                setPasswordErr(error.data.message)
+            } else {
+                setServerError(error.data.message)
 
             }
+
         }
     }
 
 
-
     return (
-        <div className='login-main-container' style={{ backgroundImage: `url(${bg})`, }}>
+        <div className='login-main-container_' style={{ backgroundImage: `url(${bg})`, }}>
+            <LoadingOverlayComp
+            status={loading}
+            />
             <Box maw={340} mx="auto" className='login-box'>
                 <div className='title'>Skill Guardians</div>
-                <form onSubmit={form.onSubmit((values) => handleLogin())}>
+                <form >
 
                     <TextInput
                         withAsterisk
                         label="Email"
                         placeholder="your@email.com"
-                        {...form.getInputProps('email')}
+                        onChange={(val) => {
+                            setEmail(val.currentTarget.value)
+                            setEmailError('')
+                            setEmailServerError('')
+                        }}
                     />
+                    {emailErr && (<p className="error-message">{emailErr}</p>)}
+                    {emailServerErr && (<p className="error-message">{emailServerErr}</p>)}
+
 
                     <PasswordInput
                         type="password"
                         withAsterisk
                         label="Password"
                         placeholder="Password"
-                        {...form.getInputProps('password')}
+                        onChange={(val) => {
+                            setPassword(val.currentTarget.value)
+                            setPasswordErr('')
+                        }}
                     />
-                    {error && (<p className="error-message">{error}</p>)}
+                    {passwordErr && (<p className="error-message">{passwordErr}</p>)}
+                    {serverError && (<p className="error-message">{serverError}</p>)}
 
 
                     <Group justify="center" mt="md">
-                        <Button disabled={isLoading}  type="submit">{isLoading ? "Submitting" : "Login"}</Button>
+                        <Button onClick={handleLogin}>{loading ? "Submitting..." : "Login"}</Button>
                     </Group>
                 </form>
                 <div className="have-account">
@@ -108,3 +118,4 @@ const Login: React.FC = () => {
 }
 
 export default Login
+

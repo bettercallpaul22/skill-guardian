@@ -7,9 +7,13 @@ import { useGetUserQuery } from '../services/api/userApiSlice'
 import { useSelector } from 'react-redux'
 import { selectCurrentToken } from '../services/features/userSlice'
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useAppSelector } from '../services2/hooks';
+import { getToken, getUser } from '../services2/features/authSlice';
 
 
 const AuthNavbar = () => {
+    // const user = useAppSelector(getUser)
+    const user = useAppSelector((state)=>state.auth)
     const location = useLocation()
     const navigate = useNavigate()
     const authService = new AuthService()
@@ -17,7 +21,6 @@ const AuthNavbar = () => {
 
 
 
-    console.log("params", location.pathname)
 
     return (
         <AppShell
@@ -30,7 +33,7 @@ const AuthNavbar = () => {
                 <Group h="100%" px="md">
                     <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
                     <Group justify="space-between" style={{ flex: 1 }}>
-                    <NavLink to="/" className="logo">
+                    <NavLink to='/dashboard' className="logo">
                         <div className="logo">Skill-Guardians</div>
                     </NavLink>
                         <Group ml="xl" gap={20} visibleFrom="sm">
@@ -41,8 +44,8 @@ const AuthNavbar = () => {
                             <NavLink to="/dashboard">
                                 <UnstyledButton className={location.pathname !== "/dashboard" ? "menu" : "menu-current"}>Book a Task</UnstyledButton>
                             </NavLink>
-                            <NavLink to={`/account/${authService.getUserId()}`}>
-                                <UnstyledButton className={location.pathname !== `/account/${authService.getUserId()}` ? "menu" : "menu-current"}>Account</UnstyledButton>
+                            <NavLink to={`/account/${user?._id}`}>
+                                <UnstyledButton className={location.pathname !== `/account/${user?._id}` ? "menu" : "menu-current"}>Account</UnstyledButton>
                             </NavLink>
                             <NavLink to="/">
                                 <UnstyledButton className={location.pathname !== "/support" ? "menu" : "menu-current"}>Support</UnstyledButton>
@@ -66,7 +69,7 @@ const AuthNavbar = () => {
                 <NavLink to="/dashboard" className="nav-side-menu" onClick={toggle}>
                     <UnstyledButton className="nav-menu">Book a Task</UnstyledButton>
                 </NavLink >
-                <NavLink className="nav-side-menu" to={`/account/${authService.getUserId()}`} onClick={toggle}>
+                <NavLink className="nav-side-menu" to={`/account/${user?._id}`} onClick={toggle}>
                     <UnstyledButton className="nav-menu">Account</UnstyledButton>
                 </NavLink>
                 <NavLink to="/" className="nav-side-menu" onClick={toggle}>

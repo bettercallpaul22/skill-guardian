@@ -17,7 +17,6 @@ const Navbar = () => {
 
 
 
-    console.log("params", location.pathname)
 
     return (
         <AppShell

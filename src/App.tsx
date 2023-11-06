@@ -9,7 +9,7 @@ import { useGetUserQuery } from './services/api/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from "jwt-decode";
 import { User } from './model';
-import { selectCurrentToken, selectCurrentUser, setCredientials } from './services/features/userSlice';
+import { selectCurrentToken, selectCurrentUser } from './services/features/userSlice';
 import TaskForm from './pages/TaskForm';
 import Account from './pages/Account';
 import BecomeTasker from './pages/BecomeTasker';
@@ -20,21 +20,21 @@ import ProfileUpdate from './pages/ProfileUpdate';
 import PrivateRoutes from './utilities/PrivateRoutes';
 import DashBoard from './pages/DashBoard';
 import HomePage from './pages/HomePage';
+import { useAppDispatch, useAppSelector } from './services2/hooks';
+import { getToken, setCredientials } from './services2/features/authSlice';
 
 function App() {
-  const token = useSelector(selectCurrentToken)
-  const current_user = useSelector(selectCurrentUser)
+  const authToken = useAppSelector(getToken)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const authService = new AuthService()
 
   useEffect(() => {
     const token = authService.getUserToken()
     if (!token) return
-    const user: User = jwt_decode(token)
-    dispatch(setCredientials({ user, token, _id: user._id }))
+    dispatch(setCredientials(token))
 
-  }, [token])
+  },[])
 
 
 
@@ -43,7 +43,7 @@ function App() {
     <div>
       <Router>
         {/* <AuthNavbar/> */}
-        {token ? <AuthNavbar /> : <Navbar />}
+        {authToken ? <AuthNavbar /> : <Navbar />}
         <Routes>
           <Route element={<PrivateRoutes />} >
             <Route element={<DashBoard />} path='/dashboard' />
@@ -54,10 +54,10 @@ function App() {
 
           </Route>
           
-          <Route path="/become-a-tasker" element={token ? <DashBoard /> : <BecomeTasker />} />
-          <Route element={token ? <DashBoard /> : <HomePage />} path='/' />
-          <Route path="/login" element={token ? <DashBoard /> : <Login />} />
-          <Route path="/register" element={token ? <DashBoard /> : <Register />} />
+          <Route path="/become-a-tasker" element={<BecomeTasker />} />
+          <Route element={ <HomePage />} path='/' />
+          <Route path="/login" element={ <Login />} />
+          <Route path="/register" element={ <Register />} />
 
 
         </Routes>

@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../services/features/userSlice";
 import "./HomePage.scss"
 import { Button, Divider, Select } from "@mantine/core";
 import image from "../assets/construction-worker.avif"
@@ -8,23 +6,29 @@ import image3 from "../assets/images/image3.jpg"
 import getstartedleft from "../assets/images/getstartedleft.png"
 import getstartedright from "../assets/images/getstartedright.png"
 import { skillData } from "../assets/skillData";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Project from "./Project";
 import { BiSolidCheckCircle } from "react-icons/bi";
 import "aos/dist/aos.css"
 import AOS from 'aos'
 import Testimonies from "../component/Testimonies";
 import { FooterCentered } from "../component/Footer";
+import { AuthService } from "../services/authServices";
 
 
 const HomePage = () => {
+    const authService = new AuthService()
     useEffect(() => {
         AOS.init({ duration: 1000 })
     }, [])
-    const token = useSelector(selectCurrentToken)
     const navigate = useNavigate()
     const [selectedSkill, setSelectedSkill] = useState("")
+
+
+    useLayoutEffect(() => {
+        authService.getUserToken() && window.location.replace('/dashboard')
+    }, [])
 
     return (
         <div className="main-home-page">
@@ -197,37 +201,6 @@ const HomePage = () => {
                     </div>
                 </div>
 
-
-                {/* <div className="info-section2" >
-                    <div>
-                        <h3 className="info-made-easier-header">Everyday life made easier</h3>
-                        <p className="sub-info-text">
-                            When life gets busy, you don’t have to tackle it alone.
-                            Get time back for what you love without breaking the bank.
-                        </p>
-                        <div className="sub-info-text-item">
-                            <BiSolidCheckCircle />
-                            <p>Choose your Tasker by reviews, skills, and price</p>
-                        </div>
-                        <div className="sub-info-text-item">
-                            <BiSolidCheckCircle />
-                            <p>Schedule when it works for you — as early as today</p>
-                        </div>
-                        <div className="sub-info-text-item">
-                            <BiSolidCheckCircle />
-                            <p>Choose your Tasker by reviews, skills, and price</p>
-                        </div>
-                        <div className="sub-info-text-item" >
-                            <BiSolidCheckCircle />
-                            <p>Choose your Tasker by reviews, skills, and price</p>
-                        </div>
-                        <div className="left-img"
-                            data-aos="fade-in"
-                            style={{ backgroundImage: `url(${image3})`, }}>
-
-                        </div>
-                    </div>
-                </div> */}
             </div>
 
             <div className="testimonial-slider-container">
@@ -255,7 +228,9 @@ const HomePage = () => {
                         <h3 className="info">
                             Hear that? The sweet sigh of relief. Start getting more done.
                         </h3>
-                        <Button>Sign Up</Button>
+                        <NavLink to='/login'>
+                            <Button>Sign Up</Button>
+                        </NavLink>
                     </div>
                     <Divider className="divider" />
                     <div className="right">
@@ -266,7 +241,9 @@ const HomePage = () => {
                         <h3 className="info">
                             Hear that? The sweet sigh of relief. Start getting more done.
                         </h3>
-                        <Button>Become A Tasker</Button>
+                        <NavLink to='/login'>
+                            <Button>Become A Tasker</Button>
+                        </NavLink>
                     </div>
 
                 </div>

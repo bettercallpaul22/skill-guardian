@@ -3,227 +3,173 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 90vh;
 
     .title {
         font-weight: 600;
         font-size: 22px;
     }
 
-    .account-detail-box {
-        // max-width: 700px;
-        min-width: 850px;
-        height: 350px;
-        margin-bottom: 60px;
-        display: flex;
-        border: 1px solid gray;
-        border-radius: 5px;
-
-    }
-
-    .left-side {
-        flex: .7;
-        border-right: 1px solid gray;
-    }
-
-    .right-side {
-        flex: 2;
-    }
-
-    .menu {
-        cursor: pointer;
-        // background-color: aquamarine;
-        display: flex;
-        height: 36px;
-        align-items: center;
-        // justify-content: space-evenly;
-        gap: 20px;
-        padding-left: 20px;
-        font-weight: 600;
-        font-size: 18px;
-        margin-bottom: 3px;
-        border-bottom: 1px solid gray;
-
-    }
-
-    .menu:hover {
-        background-color: aliceblue;
-        // transition: background-color 2s ease-in-out ;
-        transform: scale(1.01);
-    }
 
 
-
-
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid gray;
-        height: 30px;
-        padding: 20px;
-        margin-top: 0px;
-    }
-
-    button {
-        background-color: transparent;
-        border: 2px solid gray;
-        color: black;
-    }
-
-    .profile {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-    }
-
-    .img-container {
-        height: 150px;
-        width: 150px;
-        // background-color: teal;
-        border-radius: 50%;
-        // display: flex;
-        // justify-content:center;
-        // align-items: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    // .profile-info {}
-
-    .profile-menu {
-        display: flex;
-        height: 35px;
-        align-items: center;
-        // justify-content: space-evenly;
-        gap: 20px;
-        padding-left: 20px;
-        font-weight: 600;
-        font-size: 18px;
-        margin-bottom: 3px;
-        border-bottom: 1px solid gray;
-    }
-
-
-}
-
-@media (min-width: 1024px) {
     .mobile-account {
         display: none;
     }
-}
 
-@media (max-width: 1024px) {
-    .account-container {
-        // background-color: rgb(140, 187, 234);
+    .account-detail-box {
+        display: none;
+    }
+
+
+    @media (min-width: 641px) {
+
 
 
         .account-detail-box {
             // max-width: 700px;
-            min-width: 650px;
+            min-width: 850px;
             height: 350px;
             margin-bottom: 60px;
             display: flex;
             border: 1px solid gray;
             border-radius: 5px;
 
+
+
+
+            .left-side {
+                flex: .7;
+                border-right: 1px solid gray;
+            }
+
+            .right-side {
+                flex: 2;
+            }
+
+            .menu {
+                cursor: pointer;
+                // background-color: aquamarine;
+                display: flex;
+                height: 36px;
+                align-items: center;
+                // justify-content: space-evenly;
+                gap: 20px;
+                padding-left: 20px;
+                font-weight: 600;
+                font-size: 18px;
+                margin-bottom: 3px;
+                border-bottom: 1px solid gray;
+
+            }
+
+
+            .menu:hover {
+                background-color: aliceblue;
+                // transition: background-color 2s ease-in-out ;
+                transform: scale(1.01);
+            }
+
+
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid gray;
+                height: 30px;
+                padding: 20px;
+                margin-top: 0px;
+                margin-bottom: 20px;
+            }
+
+            .button {
+                background-color: transparent;
+                border: 2px solid gray;
+                color: black;
+            }
+
+            .profile {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .img-container {
+                height: 150px;
+                width: 150px;
+                background-color: teal;
+                border-radius: 50%;
+                // display: flex;
+                // justify-content:center;
+                // align-items: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+
+            // .profile-info {}
+
+            .profile-menu {
+                display: flex;
+                height: 35px;
+                align-items: center;
+                // justify-content: space-evenly;
+                gap: 20px;
+                padding-left: 20px;
+                font-weight: 600;
+                font-size: 18px;
+                margin-bottom: 3px;
+                border-bottom: 1px solid gray;
+            }
+
         }
-
-
-
-        .menu {
-            cursor: pointer;
-            // background-color: aquamarine;
-            display: flex;
-            height: 32px;
-            align-items: center;
-            // justify-content: space-evenly;
-            gap: 20px;
-            padding-left: 20px;
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 3px;
-            border-bottom: 1px solid gray;
-
-        }
-
-
-
 
 
     }
 
-    .mobile-account {
-        display: none;
-    }
-
-}
-
-
-@media (max-width: 768px) {
-    .account-container {
-        display: block;
-        // background-color: plum;
-        padding: 60px 20px 20px 20px;
-
-        .account-detail-box {
-            display: none;
-        }
-
+    @media screen and (min-width:375px) and (max-width:640px) {
         .mobile-account {
-            display: block;
-        }
-.mobile-account-sub{
-    // background-color: darkgreen;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
-        .title{
-            text-align: center;
-            margin-bottom: 10px;
-            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
         }
 
         .native-select {
             width: 100%;
+            margin-bottom: 10px;
         }
 
-        .acc-edit{
+        .acc-edit {
+            width: 100%;
             display: flex;
-            padding: 5px;
-            justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid gray;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+
         }
 
-        .acc-info{
+        .acc-info {
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
+            padding: 20px;
+            border: 2px solid gray;
+            border-radius: 5px;
         }
 
-        .acc-name-container{
+        .acc-name-container {
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            width: 100%;
             gap: 10px;
-            margin-bottom: -20px;
-
+            height: 30px;
         }
-
-        .acc-name{
-            font-weight: 600;
-            font-size: 22px;
-        }
-        .mobile-num{
-            font-weight: 600;
-            font-size: 20px;
-        }
-
 
 
     }
 
 }
+

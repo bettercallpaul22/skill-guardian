@@ -4,6 +4,7 @@ import "./TaskForm.scss"
 import { useForm } from '@mantine/form';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useGetAllUsersQuery } from '../services/api/userApiSlice';
+import { useNetwork } from '@mantine/hooks';
 
 
 interface SkillType {
@@ -17,11 +18,11 @@ const TaskForm: React.FC = () => {
   const [skill, setSkill] = useState("")
   const { state } = useLocation()
   const [taskLocation, setTaskLocation] = useState("")
-  const {isLoading, data} = useGetAllUsersQuery()
+  // const {isLoading, data} = useGetAllUsersQuery()
 
   const autoCompleteRef:any = useRef();
   const inputRef:any = useRef();
- 
+ const {online} = useNetwork()
   useEffect(() => {
    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
     inputRef.current,
@@ -32,7 +33,7 @@ const TaskForm: React.FC = () => {
     // console.log({ place });
     setTaskLocation(place?.formatted_address)
    });
-  }, []);
+  }, [online]);
  
 
 
@@ -55,7 +56,7 @@ const TaskForm: React.FC = () => {
 
 
   console.log("task place", taskLocation)
-  console.log("all user", data)
+  // console.log("all user", data)
   return (
     <div className='main-task ' style={{marginTop:40}}>
       {/* <Button className="help">Help</Button> */}
