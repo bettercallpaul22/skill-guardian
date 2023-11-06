@@ -14,6 +14,8 @@ import { AuthService } from "../services/authServices";
 
 
 const DashBoard = () => {
+window.location.reload()
+
     const authService = new AuthService();
     useLayoutEffect(() => {
         !authService.getUserToken() && window.location.replace('/')
