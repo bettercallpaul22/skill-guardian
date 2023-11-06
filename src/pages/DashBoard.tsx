@@ -19,10 +19,10 @@ const DashBoard = () => {
     useLayoutEffect(() => {
         !authService.getUserToken() && window.location.replace('/')
     }, [])
-    
-    useEffect(() => {
-        window.location.reload()
-    }, [authService.getUserToken()])
+
+    // useEffect(() => {
+    //     window.location.reload()
+    // }, [authService.getUserToken()])
 
     useEffect(() => {
         AOS.init({ duration: 1000 })
