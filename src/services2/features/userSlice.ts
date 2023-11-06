@@ -15,7 +15,7 @@ console.log("token test", userToken)
 
 
 const AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_DEVELOPMENT_URL,
+  baseURL: process.env.REACT_APP_PRODUCTION_URL,
   // withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

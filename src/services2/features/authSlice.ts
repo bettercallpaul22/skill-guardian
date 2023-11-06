@@ -14,7 +14,7 @@ const userToken = authService.getUserToken()
 const url = process.env.REACT_APP_DEVELOPMENT_URL
 
 const AxiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_DEVELOPMENT_URL,
+  baseURL: process.env.REACT_APP_PRODUCTION_URL,
   // withCredentials:true,
 
   headers: {
