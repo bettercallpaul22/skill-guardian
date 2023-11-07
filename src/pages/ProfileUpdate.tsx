@@ -157,7 +157,6 @@ const ProfileUpdate = () => {
           </div>
         </div>
         <h4 style={{ textAlign: "center" }}>PROFILE UPDATE</h4>
-
         <Select
           className="input"
           label="States"
@@ -248,7 +247,7 @@ const ProfileUpdate = () => {
           value={about}
           onChange={(event) => setAbout(event.currentTarget.value)}
 
-        />
+        /> 
 
         {/* <TextInput
           className="g-input-1 input"
@@ -261,21 +260,21 @@ const ProfileUpdate = () => {
 
         /> */}
 
-        <MobilNumberInput
+        {/* <MobilNumberInput
           onChange={(val) => { setMobileNumber(val) }}
           value={mobileNumber}
           defaultCountry='NG'
           title="Please enter your guarantor's number"
-        />
+        /> */}
 
-        {/* <MobilNumberInput
+        <MobilNumberInput
           onChange={(val) => { setGuarantorNumber(val) }}
           value={guarantorNumber}
           defaultCountry='NG'
           title='Please enter your mobile number'
-        /> */}
+        /> 
 
-        <Button style={{ minWidth: 400, marginTop: 20 }}
+      <Button style={{ minWidth: 330, marginTop: 20 }}
           onClick={() => { handleSubmit() }}
           disabled={isLoading}
 

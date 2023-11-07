@@ -5,14 +5,10 @@ import {
 } from '@mantine/core';
 import "./SkillProfile.scss"
 import { statesData } from '../assets/statesData';
-import { RegisterResponse, StatesData, User } from '../model';
+import { StatesData } from '../model';
 import { skillData } from '../assets/skillData';
 import 'react-phone-input-2/lib/style.css'
-import { useUpdateSkillMutation } from '../services/api/authApiSlice';
-// import '@mantine/dropzone/styles.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentUser, setCredientials } from '../services/features/userSlice';
+import { useState } from 'react';
 import 'react-phone-number-input/style.css'
 import MobilNumberInput from '../component/MobilNumberInput';
 import { AuthService } from '../services/authServices';
@@ -33,7 +29,6 @@ interface BankTypes {
 
 
 const SkillProfile = () => {
-  const authService = new AuthService();
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { loading, error } = useAppSelector((state) => state.user)
@@ -320,7 +315,7 @@ const SkillProfile = () => {
           {guarantorNumberErr}
         </Text>)}
 
-        <Button style={{ minWidth: 400, marginTop: 20 }}
+        <Button style={{ minWidth: 330, marginTop: 20 }}
           onClick={() => { handleSubmit() }}
         >
           {!loading ? "Submit" : "Submiting..."}
