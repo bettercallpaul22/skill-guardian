@@ -49,7 +49,7 @@ const Login: React.FC = () => {
             if (res.success) {
                 authService.setUserToken(res.token)
                 authService.setUserId(res._id)
-                navigate('/dashboard', { replace: true })
+                navigate('/dashboard')
             }
 
         } catch (error: any) {

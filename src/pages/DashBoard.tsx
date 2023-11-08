@@ -32,7 +32,10 @@ const DashBoard = () => {
 
     return (
         <div className="main-dashboard-page">
-            <div className="img-container" style={{ backgroundImage: `url(${image})`, }}>
+            <div className="img-container" 
+            // style={{ backgroundImage: `url(${image})`, }}
+            
+            >
                 <div className="desktop-search">
                     <div style={{ padding: 20 }}>
 
@@ -104,7 +107,6 @@ const DashBoard = () => {
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Help Moving" })
                         }}
                     >
@@ -113,7 +115,6 @@ const DashBoard = () => {
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Electrical" })
                         }}
                     >
@@ -122,7 +123,6 @@ const DashBoard = () => {
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Mount TV or other items" })
                         }}
                     >

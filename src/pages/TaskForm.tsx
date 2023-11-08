@@ -5,6 +5,7 @@ import { useForm } from '@mantine/form';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useGetAllUsersQuery } from '../services/api/userApiSlice';
 import { useNetwork } from '@mantine/hooks';
+import axios from 'axios';
 
 
 interface SkillType {
@@ -14,26 +15,42 @@ interface SkillType {
 
 
 const TaskForm: React.FC = () => {
-
+const [users, setUsers]= useState<string[]>()
   const [skill, setSkill] = useState("")
   const { state } = useLocation()
   const [taskLocation, setTaskLocation] = useState("")
   // const {isLoading, data} = useGetAllUsersQuery()
-
+const base_url = process.env.REACT_APP_PRODUCTION_URL
   const autoCompleteRef:any = useRef();
   const inputRef:any = useRef();
  const {online} = useNetwork()
+
+
+ const get_all_users = async() =>{
+  const res = await axios.get(`${base_url}/api/user/all`)
+  console.log('all_users',res)
+ }
+
+ useEffect(()=>{
+   get_all_users()
+
+ },[])
+
   useEffect(() => {
+    console.log('online', online)
+    if(!online) return
    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
     inputRef.current,
     
    );
+   
    autoCompleteRef.current.addListener("place_changed", async function () {
     const place = await autoCompleteRef.current.getPlace();
-    // console.log({ place });
+    let search_places = [];
+    search_places.push(place?.formatted_address);
     setTaskLocation(place?.formatted_address)
    });
-  }, [online]);
+  }, []);
  
 
 
@@ -56,14 +73,10 @@ const TaskForm: React.FC = () => {
 
 
   console.log("task place", taskLocation)
-  // console.log("all user", data)
   return (
     <div className='main-task ' style={{marginTop:40}}>
-      {/* <Button className="help">Help</Button> */}
       <div className="task-header">
-        {/* <NavLink to="/" className="logo"> */}
         <div ></div>
-        {/* </NavLink> */}
         <div className="progess-bar-container">
 
           <Progress.Root size="xl">
@@ -98,19 +111,17 @@ const TaskForm: React.FC = () => {
 
                 <input
 
-                  {...form.getInputProps('area')}
                   className='input2'
                   placeholder='Enter State'
                   ref={inputRef}
                 
                 />
+              
                
                 <input
                   type="text"
                   className={form.values.street.length > 0 ? "input" : "input2"}
                   placeholder="Your task location"
-                  // {...form.getInputProps('street')}
-
                 />
 
                 <Group justify="center" mt="md">

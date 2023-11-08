@@ -96,33 +96,32 @@ const HomePage = () => {
                         onClick={() => {
                             if (!selectedSkill) return
                             navigate("/task-form", { state: selectedSkill })
-
                         }}
                     >
                         Get Help Today
                     </Button>
+
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Help Moving" })
                         }}
                     >
                         Help Moving
                     </Button>
+
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Electrical" })
                         }}
                     >
                         Electrical
                     </Button>
+
                     <Button className="btn"
                         color='transparent'
                         onClick={() => {
-                            if (!selectedSkill) return
                             navigate("/task-form", { state: "Mount TV or other items" })
                         }}
                     >
