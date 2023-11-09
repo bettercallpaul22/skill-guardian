@@ -148,6 +148,7 @@ const TaskForm: React.FC = () => {
             type="text"
             className={'input'}
             placeholder="Your task location"
+            // value={task}
           />
 
           {isAvailable && (<p className={!isAvailable.includes('no')? 'user-available' : 'user-null'}>{isAvailable}</p>)}
@@ -159,7 +160,10 @@ const TaskForm: React.FC = () => {
 
 
         {/* YOUR OWN ADDRESS */}
-        {/* <div>
+        {/* 
+          <div className="form-container">
+        <p className="task-location"> Your task location </p>
+        <div>
           <input
 
             className='input2'
@@ -182,7 +186,10 @@ const TaskForm: React.FC = () => {
           <Group justify="center" mt="md">
             <Button onClick={check_user}>CONTINUE</Button>
           </Group>
-        </div> */}
+        </div> 
+        </div> 
+        
+        */}
       </div>
 
 
