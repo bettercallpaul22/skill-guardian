@@ -5,7 +5,7 @@ import {
 } from '@mantine/core';
 import "./ProfileUpdate.scss"
 import { statesData } from '../assets/statesData';
-import { RegisterResponse, StatesData, User } from '../model';
+import { AuthResponse, StatesData } from '../model';
 import { skillData } from '../assets/skillData';
 import 'react-phone-input-2/lib/style.css'
 import { useUpdateSkillMutation } from '../services/api/authApiSlice';

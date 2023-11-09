@@ -5,7 +5,8 @@ import { MantineProvider } from '@mantine/core';
 // core styles are required for all packages
 import '@mantine/core/styles.css';
 import { Provider } from "react-redux"
-import  {store}  from './services2/store';
+import { store } from './services/store';
+// import  {store}  from './services2/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

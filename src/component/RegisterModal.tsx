@@ -8,7 +8,7 @@ import { useRegisterMutation } from '../services/api/authApiSlice';
 import { useDispatch } from 'react-redux';
 import { setCredientials } from '../services/features/userSlice';
 import { AuthService } from '../services/authServices';
-import { RegisterResponse } from '../model';
+import { AuthResponse } from '../model';
 
 const RegisterModal:React.FC = () => {
   const authService = new AuthService()
@@ -53,7 +53,7 @@ const RegisterModal:React.FC = () => {
     if (result) return
     const { firstName, lastName, email, password } = form.values
     try {
-      const response:RegisterResponse = await register({ firstName, lastName, email, password }).unwrap()
+      const response:AuthResponse = await register({ firstName, lastName, email, password }).unwrap()
       if (response.success) {
         authService.setUserId(response.user._id)
         authService.setUserDisplayName(response.user.firstName)

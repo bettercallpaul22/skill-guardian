@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredientials, logOut } from "./features/userSlice";
 import { AuthService } from "./authServices";
+import { RooState } from "./store";
 
 
 const authService = new AuthService()
@@ -21,10 +22,9 @@ const baseQuery = fetchBaseQuery({
     mode: "cors",
 
     prepareHeaders: (headers, { getState }) => {
-        let state: any = getState()
-        const token = authService.getUserToken()
-        if (token) {
-            headers.set("authorization", `Bearer ${token}`)
+        const state = getState() as RooState
+        if (state.auth.token) {
+            headers.set("authorization", `Bearer ${state.auth.token}`)
         }
      
         return headers

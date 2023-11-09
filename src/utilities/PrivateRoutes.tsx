@@ -9,7 +9,7 @@ import { getToken } from "../services2/features/authSlice";
 
 const PrivateRoutes = () => {
     const authService = new AuthService()
-    const token = useAppSelector(getToken)
+    const token = useSelector(selectCurrentToken)
 
   
 
@@ -25,7 +25,7 @@ const PrivateRoutes = () => {
     return (
         <>
         {/* {token && (<Outlet />)} */}
-      {!authService.getUserToken() ? (<Navigate to="/" />) : <Outlet /> } 
+      {!token? (<Navigate to="/" />) : <Outlet /> } 
         </>
     )
 }

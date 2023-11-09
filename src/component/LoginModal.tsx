@@ -2,7 +2,7 @@ import { TextInput,  Button, Group, Box, PasswordInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import "./LoginModal.scss"
 import { useNavigate } from 'react-router-dom';
-import { RegisterResponse } from '../model';
+import { AuthResponse } from '../model';
 import { useLoginMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
@@ -45,7 +45,7 @@ const LoginModal = () => {
         if (result) return
         const { email, password } = form.values
         try {
-            const response: RegisterResponse = await login({ email, password }).unwrap()
+            const response: AuthResponse = await login({ email, password }).unwrap()
             if (response.success) {
                 console.log("res", response)
                 authService.setUserId(response.user._id)

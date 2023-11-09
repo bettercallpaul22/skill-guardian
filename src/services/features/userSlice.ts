@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../../model";
 import {AuthService} from "../../services/authServices";
+import { RooState } from "../store";
 
 const authService = new AuthService()
 
@@ -16,10 +17,11 @@ const authSlice = createSlice({
     reducers: {
 
         setCredientials: (state, { payload }) => {
-            console.log("payload now", payload.user);
-            const { user, token } = payload
-            state._id = user._id
-            state.user = user.user
+            
+            // console.log("payload now", payload.user);
+            const { user, token, _id } = payload
+            state._id = _id
+            state.user = user
             state.token = token
         },
 
@@ -37,5 +39,5 @@ export const {setCredientials, logOut} = authSlice.actions
 
 export default authSlice.reducer
 
-export const selectCurrentUser = (state:any) => state.auth.user
-export const selectCurrentToken = (state:any) => state.auth.token
+export const selectCurrentUser = (state:RooState) => state.auth.user
+export const selectCurrentToken = (state:RooState) => state.auth.token

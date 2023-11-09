@@ -1,4 +1,4 @@
-export interface RegisterResponse {
+export interface AuthResponse {
     success: boolean;
     token: string;
     _id: string;

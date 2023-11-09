@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import "./Login.scss"
 import { NavLink, useNavigate } from 'react-router-dom';
 import bg from "../assets/construction-worker.avif"
-import { RegisterResponse, User } from '../model';
+import { AuthResponse } from '../model';
 import { useLoginMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
@@ -19,12 +19,14 @@ import LoadingOverlayComp from '../component/LoadingOverlay';
 
 const Login: React.FC = () => {
     const authService = new AuthService()
+    const[login, {isLoading  }] = useLoginMutation()
     useLayoutEffect(() => {
         authService.getUserToken() && window.location.replace('/dashboard')
     }, [])
 
     const { loading, user, error } = useAppSelector((state) => state.auth)
-    const dispatch = useAppDispatch()
+    // const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [serverError, setServerError] = useState("")
     const [emailServerErr, setEmailServerError] = useState("")
@@ -45,12 +47,13 @@ const Login: React.FC = () => {
         const result = validateInput(email)
         if (!result) return setEmailError('Input a valid email address')
         try {
-            const res: RegisterResponse = await dispatch(loginUser({ email, password })).unwrap()
+            const res: AuthResponse = await login({ email, password }).unwrap()
             if (res.success) {
-                authService.setUserToken(res.token)
-                authService.setUserId(res._id)
-                navigate('/dashboard')
-                window.location.reload()
+                // authService.setUserToken(res.token)
+                // authService.setUserId(res._id)
+                dispatch(setCredientials(res))
+                // navigate('/dashboard')
+                // window.location.reload()
 
             }
 
@@ -105,7 +108,7 @@ const Login: React.FC = () => {
 
 
                     <Group justify="center" mt="md">
-                        <Button onClick={handleLogin}>{loading ? "Submitting..." : "Login"}</Button>
+                        <Button onClick={handleLogin}>{isLoading ? "Submitting..." : "Login"}</Button>
                     </Group>
                 </form>
                 <div className="have-account">

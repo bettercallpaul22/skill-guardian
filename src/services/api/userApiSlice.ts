@@ -1,4 +1,4 @@
-import { RegisterResponse } from "../../model";
+import { AuthResponse } from "../../model";
 import { AuthService } from "../authServices";
 import { apiSlice } from "../baseApi";
 const authService = new AuthService()
@@ -8,7 +8,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         getUser:builder.query({
             query: (userId)=>`api/user/profile/${userId}`
         }),
-        getAllUsers:builder.query<RegisterResponse[],  void>({
+        getAllUsers:builder.query<AuthResponse[],  void>({
             query: (userId)=>`api/user/all`
         }),
 

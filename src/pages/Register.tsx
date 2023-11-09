@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 import "./Register.scss"
 import { NavLink, useNavigate } from 'react-router-dom';
 import bg from "../assets/construction-worker.avif"
-import { RegisterResponse, User } from '../model';
+import { AuthResponse} from '../model';
 import { useLoginMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
@@ -50,7 +50,7 @@ const Register: React.FC = () => {
     if (firstName.length < 3) return setFirstNameErr('first name must be at least 3 characters')
     if (lastName.length < 3) return setLastNameErr('last name must be at least 3 characters')
     try {
-      const res: RegisterResponse = await dispatch(register({ firstName, lastName, email, password })).unwrap()
+      const res: AuthResponse = await dispatch(register({ firstName, lastName, email, password })).unwrap()
       if (res.success) {
         navigate('/dashboard', { replace: true })
       }

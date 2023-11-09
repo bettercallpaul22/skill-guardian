@@ -1,6 +1,6 @@
 import { AsyncThunkAction, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-import { RegisterResponse, User } from '../../model'
+import { AuthResponse, User } from '../../model'
 import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AuthService } from '../../services/authServices'
@@ -144,7 +144,7 @@ export const authSlice = createSlice({
       state.loading = true
     })
 
-    builder.addCase(loginUser.fulfilled, (state, action: PayloadAction<RegisterResponse>) => {
+    builder.addCase(loginUser.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
     
       state.loading = false
       const data:StateType = jwt_decode(action.payload.token)
@@ -167,7 +167,7 @@ export const authSlice = createSlice({
       state.loading = true
     })
 
-    builder.addCase(register.fulfilled, (state, action: PayloadAction<RegisterResponse>) => {
+    builder.addCase(register.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
       state.loading = false
       const data:StateType = jwt_decode(action.payload.token)
       state._id = data._id
