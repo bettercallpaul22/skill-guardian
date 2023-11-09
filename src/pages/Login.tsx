@@ -50,6 +50,8 @@ const Login: React.FC = () => {
                 authService.setUserToken(res.token)
                 authService.setUserId(res._id)
                 navigate('/dashboard')
+                window.location.reload()
+
             }
 
         } catch (error: any) {
@@ -68,7 +70,7 @@ const Login: React.FC = () => {
     return (
         <div className='login-main-container_' style={{ backgroundImage: `url(${bg})`, }}>
             <LoadingOverlayComp
-            status={loading}
+                status={loading}
             />
             <Box maw={340} mx="auto" className='login-box'>
                 <div className='title'>Skill Guardians</div>

@@ -1,6 +1,6 @@
 import "./DashBoard.scss"
 import { Button, Select } from "@mantine/core";
-import image from "../assets/construction-worker.avif"
+import image from "../assets/images/errand-girl.jpg"
 import image2 from "../assets/images/image1.jpg"
 import image3 from "../assets/images/image3.jpg"
 import { skillData } from "../assets/skillData";
@@ -33,7 +33,7 @@ const DashBoard = () => {
     return (
         <div className="main-dashboard-page">
             <div className="img-container" 
-            // style={{ backgroundImage: `url(${image})`, }}
+            style={{ backgroundImage: `url(${image})`, }}
             
             >
                 <div className="desktop-search">
