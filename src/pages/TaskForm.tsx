@@ -21,6 +21,7 @@ const TaskForm: React.FC = () => {
   const { state } = useLocation()
   const [taskLocation, setTaskLocation] = useState("")
   const [isAvailable, setisAvailable] = useState('')
+  const [getTaskerProgress, setGetTaskerProgress] = useState(false)
 
   // const {isLoading, data} = useGetAllUsersQuery()
   const base_url = process.env.REACT_APP_PRODUCTION_URL
@@ -46,7 +47,6 @@ const TaskForm: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log('online', online)
     if (!online) return
     autoCompleteRef.current = new window.google.maps.places.Autocomplete(
       inputRef.current,
@@ -89,12 +89,13 @@ const TaskForm: React.FC = () => {
     const newArr = location_option[0].split(', ')
     const result = usersState.some((item: any) => newArr.includes(item))
     if (result) {
-
-      setisAvailable("There's a tasker available in your selected area")
+      setisAvailable("Good news skillGuardians is  available in your area")
     } else {
       setisAvailable("There's no available tasker in your selected area")
 
     }
+
+    
   }
 
 
@@ -135,12 +136,34 @@ const TaskForm: React.FC = () => {
 
       <div className="form-container">
         <p className="task-location"> Your task location </p>
-        <form onSubmit={form.onSubmit((values) => console.log(values.area))} >
+        <div>
+          <input
+            className='input2'
+            placeholder='Enter State'
+            ref={inputRef}
+            onChange={() => setisAvailable('')}
 
+          />
+          <input
+            type="text"
+            className={'input'}
+            placeholder="Your task location"
+          />
+
+          {isAvailable && (<p className={!isAvailable.includes('no')? 'user-available' : 'user-null'}>{isAvailable}</p>)}
+
+          <Group justify="center" mt="md">
+            <Button onClick={check_user}>CONTINUE</Button>
+          </Group>
+        </div>
+
+
+        {/* YOUR OWN ADDRESS */}
+        {/* <div>
           <input
 
             className='input2'
-            placeholder='Enter State'
+            placeholder='Your Area'
             ref={inputRef}
             onChange={() => setisAvailable('')}
 
@@ -150,7 +173,7 @@ const TaskForm: React.FC = () => {
           <input
             type="text"
             className={form.values.street.length > 0 ? "input" : "input2"}
-            placeholder="Your task location"
+            placeholder='Your street address'
           />
           {isAvailable && (<p className={!isAvailable.includes('no')? 'user-available' : 'user-null'}>{isAvailable}</p>)}
 
@@ -159,7 +182,7 @@ const TaskForm: React.FC = () => {
           <Group justify="center" mt="md">
             <Button onClick={check_user}>CONTINUE</Button>
           </Group>
-        </form>
+        </div> */}
       </div>
 
 
