@@ -12,7 +12,7 @@ import { useUpdateSkillMutation } from '../services/api/authApiSlice';
 // import '@mantine/dropzone/styles.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentUser, setCredientials } from '../services/features/userSlice';
+import { selectCurrentUser, setCredientials, setUser } from '../services/features/userSlice';
 import 'react-phone-number-input/style.css'
 import MobilNumberInput from '../component/MobilNumberInput';
 import { AuthService } from '../services/authServices';
@@ -23,6 +23,7 @@ import { update_profile } from '../services2/features/userSlice';
 import { useAppDispatch, useAppSelector } from '../services2/hooks';
 import { get_my_profile } from '../services2/features/userSlice';
 import LoadingOverlayComp from '../component/LoadingOverlay';
+import { useUpdateMutation } from '../services/api/userApiSlice';
 
 interface BankTypes {
   id: string;
@@ -35,13 +36,14 @@ interface BankTypes {
 
 
 const ProfileUpdate = () => {
-  const {loading, error, user:current_user} = useAppSelector((state)=>state.user)
+  const authService = new AuthService()
+  const current_user = useSelector(selectCurrentUser)
+console.log("current user", current_user)
 
-
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   // const current_user: User = useSelector(selectCurrentUser)
-  const [updateSkill, { isLoading }] = useUpdateSkillMutation()
+  const [update, { isLoading }] = useUpdateMutation()
 
 
 
@@ -58,19 +60,19 @@ const ProfileUpdate = () => {
   const [mobileNumber, setMobileNumber] = useState<any>("")
 
 
-  const getMe = async () => {
-    try{
-      const res = await dispatch(get_my_profile()).unwrap()
+  // const getMe = async () => {
+  //   try{
+  //     const res = await dispatch(get_my_profile()).unwrap()
 
-    }
-    catch(err){
+  //   }
+  //   catch(err){
 
-    }
+  //   }
 
-  }
+  // }
 
   useEffect(() => {
-    getMe()
+    // getMe()
   }, [])
 
   useEffect(() => {
@@ -105,9 +107,11 @@ const ProfileUpdate = () => {
     }
     try {
 
-      const response:any = await dispatch(update_profile(userData)).unwrap()
-      if (response.success === true) {
-      navigate(`/account/${response.user._id}`, { replace: true })
+      const res:AuthResponse = await update(userData).unwrap()
+      if (res.success === true) {
+        dispatch(setUser(res))
+        authService.setUser(res.user)
+      // navigate(`/account/${res.user._id}`, { replace: true })
       }
 
     } catch (error) {
@@ -141,7 +145,7 @@ const ProfileUpdate = () => {
   return (
     <div className="profile-update-form-container">
       <LoadingOverlayComp
-      status={loading}
+      status={isLoading}
       />
       <div className="wrapper">
         <div className="avatar-box" style={{ display: "flex", justifyContent: "center", marginTop: 40 }}>
@@ -279,7 +283,7 @@ const ProfileUpdate = () => {
           disabled={isLoading}
 
         >
-          {!loading ? "Update" : "Updating Please wait..."}
+          {!isLoading ? "Update" : "Updating Please wait..."}
         </Button>
 
       </div>

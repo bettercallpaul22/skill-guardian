@@ -1,107 +1,118 @@
-import { TextInput,  Button, Group, Box, PasswordInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { TextInput, Button, Group, Box, PasswordInput } from '@mantine/core';
 import "./LoginModal.scss"
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthResponse } from '../model';
 import { useLoginMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { setCredientials } from '../services/features/userSlice';
 
 
-const LoginModal = () => {
 
+const LoginModal: React.FC = () => {
     const authService = new AuthService()
+    const[login, {isLoading  }] = useLoginMutation()
+    useLayoutEffect(() => {
+        authService.getUserToken() && window.location.replace('/dashboard')
+    }, [])
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [error, setError] = useState("")
-    const [login, { isLoading }] = useLoginMutation()
+    const [serverError, setServerError] = useState("")
+    const [emailServerErr, setEmailServerError] = useState("")
+    const [emailErr, setEmailError] = useState("")
+    const [passwordErr, setPasswordErr] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
 
-    const form = useForm({
-        initialValues: {
-            email: '',
-            password: '',
-        },
-
-        validate: {
-            email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            password: (value: string) => (value.length < 6 ? "password must me at least 6 characters length" : null),
-        },
-    });
-
-    const validateForm = () => {
-        if (
-            form.errors.email ||
-            form.errors.password ||
-            form.values.email.length < 3 ||
-            form.values.password.length < 6
-        ) return true
+    const validateInput = (value: string) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(value);
     }
 
+
     const handleLogin = async () => {
-        const result = validateForm()
-        if (result) return
-        const { email, password } = form.values
+        if (!password || !email) return;
+        const result = validateInput(email)
+        if (!result) return setEmailError('Input a valid email address')
         try {
-            const response: AuthResponse = await login({ email, password }).unwrap()
-            if (response.success) {
-                console.log("res", response)
-                authService.setUserId(response.user._id)
-                authService.setUserDisplayName(response.user.firstName)
-                authService.setUserToken(response.token)
-                dispatch(setCredientials(response))
-                navigate("/skill-profile")
-            }
-            console.log("response", response)
-        } catch (error: any) {
-            if (error.status === 404) {
-                setError(error.data)
-            } else if (error.status === 401) {
-                setError(error.data.message)
+            const res: AuthResponse = await login({ email, password }).unwrap()
+            if (res.success) {
+                authService.setUserToken(res.token)
+                authService.setUserId(res._id)
+                authService.setUser(res.user)
+                dispatch(setCredientials(res))
+                navigate('/skill-profile', {replace:true})
+                // window.location.reload()
 
             }
+
+        } catch (error: any) {
+            if (error.status === 404) { setEmailServerError(error.data) }
+            else if (error.status === 401) {
+                setPasswordErr(error.data.message)
+            } else {
+                setServerError(error.data.message)
+
+            }
+
         }
     }
 
 
-    // console.log('error', error)
-
     return (
-        <Box maw={340} mx="auto" className='login-box'>
-            <div className='title'>Skill Guardians</div>
-            <form onSubmit={form.onSubmit((values) => handleLogin())}>
+        // <div className='login-modal-container_' style={{ backgroundImage: `url(${bg})`, }}>
+        //     <LoadingOverlayComp
+        //         status={isLoading}
+        //     />
+            <Box maw={340} mx="auto" className='login-box'>
+                <div className='title'>Skill Guardians</div>
+                <form >
 
-                <TextInput
-                    withAsterisk
-                    label="Email"
-                    placeholder="your@email.com"
-                    {...form.getInputProps('email')}
-                />
-
-                <PasswordInput
-                    type="password"
-                    withAsterisk
-                    label="Password"
-                    placeholder="Password"
-                    {...form.getInputProps('password')}
-                />
-                {error && (<p className="error-message">{error}</p>)}
+                    <TextInput
+                        withAsterisk
+                        label="Email"
+                        placeholder="your@email.com"
+                        onChange={(val) => {
+                            setEmail(val.currentTarget.value)
+                            setEmailError('')
+                            setEmailServerError('')
+                        }}
+                    />
+                    {emailErr && (<p className="error-message">{emailErr}</p>)}
+                    {emailServerErr && (<p className="error-message">{emailServerErr}</p>)}
 
 
-                <Group justify="center" mt="md">
-                    <Button loading={isLoading} type="submit">Login</Button>
-                </Group>
-            </form>
-            {/* <div className="have-account">
+                    <PasswordInput
+                        type="password"
+                        withAsterisk
+                        label="Password"
+                        placeholder="Password"
+                        onChange={(val) => {
+                            setPassword(val.currentTarget.value)
+                            setPasswordErr('')
+                        }}
+                    />
+                    {passwordErr && (<p className="error-message">{passwordErr}</p>)}
+                    {serverError && (<p className="error-message">{serverError}</p>)}
+
+
+                    <Group justify="center" mt="md">
+                        <Button onClick={handleLogin}>{isLoading ? "Submitting..." : "Login"}</Button>
+                    </Group>
+                </form>
+                <div className="have-account">
                     <p className='text1'>Already have an account ?</p>
                     <NavLink to="/register">
                         <p className='text2' >Register</p>
                     </NavLink>
-                </div> */}
-        </Box>
+                </div>
+            </Box>
+        // </div>
     );
 }
 
 export default LoginModal
+

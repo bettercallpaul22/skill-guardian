@@ -1,22 +1,14 @@
 import { useDisclosure } from '@mantine/hooks';
-import { AppShell, Burger, Button, Group, UnstyledButton } from '@mantine/core';
-// import { MantineLogo } from '@mantine/ds';
+import { AppShell, Burger, Group, UnstyledButton } from '@mantine/core';
 import './AuthNavbar.scss';
-import { AuthService } from '../services/authServices'
-import { useGetUserQuery } from '../services/api/userApiSlice'
-import { useSelector } from 'react-redux'
-import { selectCurrentToken } from '../services/features/userSlice'
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useAppSelector } from '../services2/hooks';
-import { getToken, getUser } from '../services2/features/authSlice';
+import { NavLink, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../services/features/userSlice';
 
 
 const AuthNavbar = () => {
-    // const user = useAppSelector(getUser)
-    const user = useAppSelector((state)=>state.auth)
+    const user = useSelector(selectCurrentUser)
     const location = useLocation()
-    const navigate = useNavigate()
-    const authService = new AuthService()
     const [opened, { toggle }] = useDisclosure();
 
 

@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@types/react-places-autocomplete": "^7.2.10",
+    "@types/redux-persist": "^4.3.1",
     "postcss": "^8.4.30",
     "postcss-preset-mantine": "^1.7.0",
     "postcss-simple-vars": "^7.0.1"

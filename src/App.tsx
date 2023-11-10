@@ -5,7 +5,6 @@ import Register from './pages/Register';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Login from './pages/Login';
 import { AuthService } from './services/authServices';
-import { useGetUserQuery } from './services/api/userApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import jwt_decode from "jwt-decode";
 import { User } from './model';
@@ -24,15 +23,14 @@ import { useAppDispatch, useAppSelector } from './services2/hooks';
 import { getToken, setCredientials } from './services2/features/authSlice';
 
 function App() {
-  const authToken = useAppSelector(getToken)
-
-  const dispatch = useAppDispatch()
+  const authToken = useSelector(selectCurrentToken)
+  const dispatch = useDispatch()
   const authService = new AuthService()
 
   useEffect(() => {
     const token = authService.getUserToken()
     if (!token) return
-    dispatch(setCredientials(token))
+    dispatch(setCredientials({token, _id:authService.getUserId(), user:authService.getUser() }))
 
   },[])
 

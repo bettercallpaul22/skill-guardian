@@ -20,10 +20,7 @@ const DashBoard = () => {
         !authService.getUserToken() && window.location.replace('/')
     }, [])
 
-    // useEffect(() => {
-    //     window.location.reload()
-    // }, [authService.getUserToken()])
-
+  
     useEffect(() => {
         AOS.init({ duration: 1000 })
     }, [])
@@ -34,7 +31,6 @@ const DashBoard = () => {
         <div className="main-dashboard-page">
             <div className="img-container" 
             style={{ backgroundImage: `url(${image})`, }}
-            
             >
                 <div className="desktop-search">
                     <div style={{ padding: 20 }}>

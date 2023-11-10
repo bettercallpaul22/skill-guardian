@@ -1,13 +1,19 @@
+// .register-main-container_{
+//     height: 90vh;
+//     padding: 50px;
+//     background-size: cover;
 
-    .Register-box {
-         background-color: rgb(240, 244, 244); 
-        /* margin-top: 50px; */
+
+    .register-modal-box{
+        scroll-behavior: smooth;
+        background-color: rgb(240, 244, 244); 
+      margin-top: 50px;
         padding: 20px;
         border-radius: 10px;
         border: 1px solid rgb(202, 199, 199);
+    }
     
-
-    .title {
+    .title{
         /* background-color: plum; */
         text-align: center;
         font-weight: 600;
@@ -15,7 +21,8 @@
     }
 
     .have-account {
-        // background-color: teal;
+        background-color: rgb(240, 244, 244); 
+
         font-size: 14px;
         display: flex;
         justify-content: space-between;
@@ -30,7 +37,6 @@
         text-decoration: underline;
         cursor: pointer;
         color: black;
-
     }
     .text2:hover {
         font-weight: 600;
@@ -45,4 +51,5 @@
         font-size:12px;
     }
 
-}
+// }
+

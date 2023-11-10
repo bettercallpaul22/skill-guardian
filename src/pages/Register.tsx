@@ -4,7 +4,7 @@ import "./Register.scss"
 import { NavLink, useNavigate } from 'react-router-dom';
 import bg from "../assets/construction-worker.avif"
 import { AuthResponse} from '../model';
-import { useLoginMutation } from '../services/api/authApiSlice';
+import { useLoginMutation, useRegisterMutation } from '../services/api/authApiSlice';
 import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect, useState } from 'react';
@@ -17,12 +17,14 @@ import LoadingOverlayComp from '../component/LoadingOverlay';
 
 
 const Register: React.FC = () => {
+
+  const [register, {isLoading}] = useRegisterMutation()
   const authService = new AuthService()
   useLayoutEffect(() => {
     authService.getUserToken() && window.location.replace('/dashboard')
   }, [])
   const { loading, } = useAppSelector((state) => state.auth)
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [serverError, setServerError] = useState("")
   const [emailServerErr, setEmailServerError] = useState("")
@@ -50,8 +52,12 @@ const Register: React.FC = () => {
     if (firstName.length < 3) return setFirstNameErr('first name must be at least 3 characters')
     if (lastName.length < 3) return setLastNameErr('last name must be at least 3 characters')
     try {
-      const res: AuthResponse = await dispatch(register({ firstName, lastName, email, password })).unwrap()
+      const res: AuthResponse = await register({ firstName, lastName, email, password }).unwrap()
       if (res.success) {
+        dispatch(setCredientials(res))
+        authService.setUserToken(res.token)
+        authService.setUserId(res._id)
+        authService.setUser(res.user)
         navigate('/dashboard', { replace: true })
       }
 
@@ -130,7 +136,7 @@ const Register: React.FC = () => {
 
 
           <Group justify="center" mt="md">
-            <Button onClick={handleRegister}>{loading ? "Submitting..." : "Register"}</Button>
+            <Button onClick={handleRegister}>{isLoading ? "Submitting..." : "Register"}</Button>
           </Group>
         </form>
         <div className="have-account">

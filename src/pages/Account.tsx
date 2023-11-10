@@ -11,25 +11,29 @@ import { HiMail } from "react-icons/hi"
 import { RiLockPasswordFill, RiDeleteBin5Fill } from "react-icons/ri"
 import { Button, Group, Avatar, NativeSelect, Text, LoadingOverlay } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
-import { clearCredientials, getToken, getUser } from '../services2/features/authSlice'
-import { get_current_user, remove_user } from '../services2/features/userSlice'
 import { useAppDispatch, useAppSelector } from '../services2/hooks'
 import { get_my_profile } from '../services2/features/userSlice'
 import { AuthService } from '../services/authServices'
+import { useDispatch, useSelector } from 'react-redux'
+import { logOut, selectCurrentUser } from '../services/features/userSlice'
+import { useGetMeQuery, useUpdateMutation } from '../services/api/userApiSlice'
 
 
 const Account: React.FC = () => {
+
 const authService = new AuthService()
-  const authUser = useAppSelector(getUser)
-  const {loading, error, user} = useAppSelector((state)=>state.user)
-  const token = useAppSelector(getToken)
-  const dispatch = useAppDispatch()
+  // const user = useSelector(selectCurrentUser)
+  // const [update, {isLoading}] = useUpdateMutation()
+  const {isLoading, data:user} = useGetMeQuery()
+  // const {loading, error, user} = useAppSelector((state)=>state.user)
+  // const token = useAppSelector(getToken)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
 
-  const getMe = async () => {
+  const getProfile = async () => {
     try{
-      const res = await dispatch(get_my_profile()).unwrap()
+      // const res = await getMe().unwrap()
 
     }
     catch(err){
@@ -43,7 +47,8 @@ const authService = new AuthService()
 }, [])
 
   useEffect(() => {
-    getMe()
+    getProfile()
+
   }, [])
 
 
@@ -54,7 +59,7 @@ const authService = new AuthService()
         {/* MOBILE */}
         <div className="mobile-account">
           <LoadingOverlay
-          visible={loading}
+          visible={isLoading}
           zIndex={1000}
           overlayProps={{radius:'sm',blur:2}}
           loaderProps={{color:'dodgerBlue', type:'bars'}}
@@ -83,9 +88,7 @@ const authService = new AuthService()
             <Group justify="center" mt="md">
               <Button
                 onClick={() => {
-                  dispatch(clearCredientials())
-                      dispatch(remove_user())
-
+                  dispatch(logOut())
                   navigate("/")
                 }}
               >
@@ -172,8 +175,7 @@ const authService = new AuthService()
                 <Group justify="center" mt="md">
                   <Button
                     onClick={() => {
-                      dispatch(clearCredientials())
-                      dispatch(remove_user())
+                      dispatch(logOut())
                       navigate("/")
                     }}
                   >

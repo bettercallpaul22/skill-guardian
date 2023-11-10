@@ -1,3 +1,4 @@
+import { User } from "../model";
 
 
 
@@ -35,11 +36,21 @@ export class AuthService {
         window.localStorage[USER_TOKEN_KEY] = userToken;
       }
 
+      setUser(user: User) {
+        localStorage.setItem('user', JSON.stringify(user))
+      }
+
+      getUser() {
+        const user = JSON.parse(localStorage.getItem('user'))
+        return user
+      }
+
 
       clearUser() {
         window.localStorage.removeItem(USER_ID_KEY );
         window.localStorage.removeItem(USER_NAME_KEY );
         window.localStorage.removeItem(USER_TOKEN_KEY );
+        window.localStorage.removeItem('user');
      
       }
 

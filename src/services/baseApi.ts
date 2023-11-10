@@ -17,7 +17,7 @@ const enviroment: Enviroment = {
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: enviroment.development,
+    baseUrl: enviroment.production,
     credentials: "include",
     mode: "cors",
 
@@ -41,7 +41,7 @@ const baseQueryReAuth = async (args: any, api: any, extraOptions: any) => {
         if (refreshResult?.data) {
             const user = api.getState().auth.user
             // store the new token
-            api.dispatch(setCredientials({ ...refreshResult.data, user }))
+            // api.dispatch(setCredientials({ ...refreshResult.data, user }))
 
             //retry the original query with new access token
             result = await baseQuery(args, api, extraOptions)

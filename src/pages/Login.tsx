@@ -1,5 +1,4 @@
 import { TextInput, Button, Group, Box, PasswordInput } from '@mantine/core';
-import { useForm } from '@mantine/form';
 import "./Login.scss"
 import { NavLink, useNavigate } from 'react-router-dom';
 import bg from "../assets/construction-worker.avif"
@@ -9,10 +8,6 @@ import { AuthService } from '../services/authServices';
 import { useDispatch } from 'react-redux';
 import { useLayoutEffect, useState } from 'react';
 import { setCredientials } from '../services/features/userSlice';
-import jwt_decode from 'jwt-decode'
-import { loginUser } from '../services2/features/authSlice';
-import { useAppDispatch, useAppSelector } from '../services2/hooks';
-import axios from 'axios';
 import LoadingOverlayComp from '../component/LoadingOverlay';
 
 
@@ -24,8 +19,6 @@ const Login: React.FC = () => {
         authService.getUserToken() && window.location.replace('/dashboard')
     }, [])
 
-    const { loading, user, error } = useAppSelector((state) => state.auth)
-    // const dispatch = useAppDispatch()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [serverError, setServerError] = useState("")
@@ -49,10 +42,11 @@ const Login: React.FC = () => {
         try {
             const res: AuthResponse = await login({ email, password }).unwrap()
             if (res.success) {
-                // authService.setUserToken(res.token)
-                // authService.setUserId(res._id)
+                authService.setUserToken(res.token)
+                authService.setUserId(res._id)
+                authService.setUser(res.user)
                 dispatch(setCredientials(res))
-                // navigate('/dashboard')
+                navigate('/dashboard', {replace:true})
                 // window.location.reload()
 
             }
@@ -73,7 +67,7 @@ const Login: React.FC = () => {
     return (
         <div className='login-main-container_' style={{ backgroundImage: `url(${bg})`, }}>
             <LoadingOverlayComp
-                status={loading}
+                status={isLoading}
             />
             <Box maw={340} mx="auto" className='login-box'>
                 <div className='title'>Skill Guardians</div>

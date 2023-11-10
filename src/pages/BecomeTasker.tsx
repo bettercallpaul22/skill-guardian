@@ -14,7 +14,7 @@ import LoginModal from '../component/LoginModal';
 import RegisterModal from '../component/RegisterModal';
 import { area } from '../assets/area-Data';
 import { skillData } from '../assets/skillData';
-import { selectCurrentToken } from '../services/features/userSlice'
+// import { selectCurrentToken } from '../services/features/userSlice'
 import SkillProfile from './SkillProfile';
 import { statesData } from '../assets/statesData';
 import { StatesData } from '../model';
@@ -22,7 +22,8 @@ import { StatesData } from '../model';
 
 
 const BecomeTasker = () => {
-  const token = useSelector(selectCurrentToken)
+  // const token ="hjhh"
+  // const token = useSelector(selectCurrentToken)
   const authService = new AuthService()
   const dispatch = useDispatch()
   const navigate = useNavigate()
