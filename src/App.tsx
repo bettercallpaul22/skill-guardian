@@ -47,13 +47,13 @@ function App() {
             <Route element={<DashBoard />} path='/dashboard' />
             <Route path="/account/:id" element={<Account />} />
             <Route path="/skill-profile" element={<SkillProfile />} />
-            <Route path="/task-form" element={<TaskForm />} />
           <Route path="/profile-update" element={<ProfileUpdate />} /> 
 
           </Route>
           
           <Route path="/become-a-tasker" element={<BecomeTasker />} />
           <Route element={ <HomePage />} path='/' />
+          <Route path="/task-form" element={<TaskForm />} />
           <Route path="/login" element={ <Login />} />
           <Route path="/register" element={ <Register />} />
 
