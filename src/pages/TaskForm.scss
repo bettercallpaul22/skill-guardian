@@ -50,6 +50,26 @@ border-bottom: 1px solid gray;
     text-align: center;
 }
 
+.progress1{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 0px 30px 10px 30px;
+    border: 1px solid gray;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 30px;
+
+
+    .location-container{
+        margin-top: -20px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        height: 30px;
+    }
+}
+
 .task-name{
     font-weight: 600;
     font-size: 22px;

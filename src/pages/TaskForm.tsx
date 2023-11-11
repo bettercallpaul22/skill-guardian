@@ -7,6 +7,8 @@ import { useGetAllUsersQuery } from '../services/api/userApiSlice';
 import { useNetwork } from '@mantine/hooks';
 import axios from 'axios';
 import { User } from '../model';
+import { ImLocation } from 'react-icons/im'
+import { FaCheck } from 'react-icons/fa'
 
 
 interface SkillType {
@@ -21,18 +23,23 @@ const TaskForm: React.FC = () => {
   const { state } = useLocation()
   const [taskLocation, setTaskLocation] = useState("")
   const [isAvailable, setisAvailable] = useState('')
+  const [taskAddress, setTaskAddress] = useState('')
+  const [homeAddress, setHomeAddress] = useState('')
+  const [userAddress, setUserAddress] = useState('')
   const [getTaskerProgress, setGetTaskerProgress] = useState(false)
+  const [typing, setTyping] = useState(false)
 
   // const {isLoading, data} = useGetAllUsersQuery()
   const base_url = process.env.REACT_APP_PRODUCTION_URL
   const autoCompleteRef: any = useRef();
-  const inputRef: any = useRef();
+  const autoComplete_homeAddress: any = useRef();
+  const inputRef1: any = useRef();
+  const inputRef2: any = useRef();
   const { online } = useNetwork()
 
 
   const get_all_users = async () => {
     try {
-
       const res = await axios.get(`${base_url}/api/user/all`)
       setUsersState(res.data.map((user: User) => user?.state?.toLowerCase()))
     } catch (error) {
@@ -47,13 +54,17 @@ const TaskForm: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    if (!online) return
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
+    autoComplete_homeAddress.current = new window.google.maps.places.Autocomplete(inputRef2.current,);
+    autoComplete_homeAddress.current.addListener("place_changed", async () => {
+      const home_address = await autoComplete_homeAddress.current.getPlace();
+      setUserAddress(home_address?.formatted_address);
+    });
+  }, [typing]);
 
-    );
 
-    autoCompleteRef.current.addListener("place_changed", async function () {
+  useEffect(() => {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(inputRef1.current,);
+    autoCompleteRef.current.addListener("place_changed", async () => {
       const place = await autoCompleteRef.current.getPlace();
       let search_places = [];
       search_places.push(place?.formatted_address);
@@ -63,18 +74,10 @@ const TaskForm: React.FC = () => {
 
 
 
-  const form = useForm({
-    initialValues: {
-      area: '',
-      street: '',
 
-    },
 
-    validate: {
-      area: (value: string) => (value.length < 6 ? "password must me at least 6 characters length" : null),
-      street: (value: string) => (value.length < 6 ? "password must me at least 6 characters length" : null),
-    },
-  });
+
+
 
   // console.log('all_users',usersState)
 
@@ -84,10 +87,10 @@ const TaskForm: React.FC = () => {
   //check if a user exist in option
   const check_user = () => {
     let location_option: string[] = []
-    location_option.push(taskLocation.toLowerCase())
+    location_option.push(taskLocation?.toLowerCase())
     location_option.map(item => item?.toLowerCase())
-    const newArr = location_option[0].split(', ')
-    const result = usersState.some((item: any) => newArr.includes(item))
+    const newArr = location_option[0]?.split(', ')
+    const result = usersState.some((item: any) => newArr?.includes(item))
     if (result) {
       setisAvailable("Good news skillGuardians is  available in your area")
     } else {
@@ -95,12 +98,13 @@ const TaskForm: React.FC = () => {
 
     }
 
-    
+
+
   }
 
 
 
-
+  console.log("user ADRESS", userAddress)
 
   return (
     <div className='main-task ' style={{ marginTop: 40 }}>
@@ -109,8 +113,8 @@ const TaskForm: React.FC = () => {
         <div className="progess-bar-container">
 
           <Progress.Root size="xl">
-            <Progress.Section value={10} color="cyan">
-              <Progress.Label>Location</Progress.Label>
+            <Progress.Section value={getTaskerProgress ? 30 : 5} color="cyan">
+              <Progress.Label>Task Location</Progress.Label>
             </Progress.Section>
             <Progress.Section value={0} color="pink">
               <Progress.Label>Photos</Progress.Label>
@@ -130,67 +134,108 @@ const TaskForm: React.FC = () => {
         </p>
       </div>
 
+      {getTaskerProgress && (<div className="progress1">
+        <h3>Your task location</h3>
+        <div className="location-container">
+          <ImLocation size={24} />
+          <h4>{taskLocation} / {taskAddress}</h4>
+          <FaCheck color='green' />
+        </div>
+      </div>)}
+
+      {/* <div className="progress1">
+        <h3>Your location or office address</h3>
+        <div className="location-container">
+          <ImLocation size={24} />
+          <h4>{taskLocation}</h4>
+          <FaCheck color='green' />
+        </div>
+      </div> */}
+
       <div className="task-form-details">
         <p className="task-name">{skill}</p>
       </div>
 
-      <div className="form-container">
+      {!getTaskerProgress && (<div className="form-container">
         <p className="task-location"> Your task location </p>
         <div>
           <input
             className='input2'
-            placeholder='Enter State'
-            ref={inputRef}
-            onChange={() => setisAvailable('')}
+            placeholder='Your task State'
+            ref={inputRef1}
+            onChange={() => {
+              setisAvailable('')
+              setGetTaskerProgress(false)
+            }}
 
           />
           <input
             type="text"
             className={'input'}
-            placeholder="Your task location"
-            // value={task}
+            placeholder="Your task address"
+            value={taskAddress}
+            onChange={(e) => {
+              setTaskAddress(e.target.value)
+              e.target.value.length > 3 && check_user()
+            }}
           />
 
-          {isAvailable && (<p className={!isAvailable.includes('no')? 'user-available' : 'user-null'}>{isAvailable}</p>)}
+          {isAvailable && (<p className={!isAvailable.includes('no') ? 'user-available' : 'user-null'}>{isAvailable}</p>)}
 
           <Group justify="center" mt="md">
-            <Button onClick={check_user}>CONTINUE</Button>
+            <Button
+              onClick={() => {
+                if (isAvailable.includes('new')) {
+                  setGetTaskerProgress(true)
+                  setisAvailable('')
+
+                }
+              }}>CONTINUE</Button>
           </Group>
         </div>
 
+      </div>)}
 
-        {/* YOUR OWN ADDRESS */}
-        {/* 
-          <div className="form-container">
-        <p className="task-location"> Your task location </p>
+
+      {getTaskerProgress && (<div className="form-container">
+        <p className="task-location"> Your house or office address </p>
         <div>
           <input
-
             className='input2'
-            placeholder='Your Area'
-            ref={inputRef}
-            onChange={() => setisAvailable('')}
+            placeholder='Your State'
+            ref={inputRef2}
+            onChange={() => {
+              setTyping(true)
+              // setisAvailable('')
+              // setGetTaskerProgress(false)
+            }}
 
           />
-
-
           <input
             type="text"
-            className={form.values.street.length > 0 ? "input" : "input2"}
-            placeholder='Your street address'
+            className={'input'}
+            placeholder="Your address"
+            value={homeAddress}
+            onChange={(e) => {
+              setHomeAddress(e.target.value)
+              // e.target.value.length > 3 && check_user()
+            }}
           />
-          {isAvailable && (<p className={!isAvailable.includes('no')? 'user-available' : 'user-null'}>{isAvailable}</p>)}
 
-
+          {isAvailable && (<p className={!isAvailable.includes('no') ? 'user-available' : 'user-null'}>{isAvailable}</p>)}
 
           <Group justify="center" mt="md">
-            <Button onClick={check_user}>CONTINUE</Button>
+            <Button
+              onClick={() => {
+                // if (isAvailable.includes('new')) {
+                //   setGetTaskerProgress(true)
+
+                // }
+              }}>See Taskers & Prices </Button>
           </Group>
-        </div> 
-        </div> 
-        
-        */}
-      </div>
+        </div>
+
+      </div>)}
 
 
       {/* <div className="task-options">options</div>
